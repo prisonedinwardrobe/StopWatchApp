@@ -19,19 +19,18 @@ class ViewController: UIViewController {
     
     @objc func updateTimer() {
         currentTimeSeconds += 1
-        minutesLabel.text = "\(currentTimeSeconds / 100)"
-        secondsLabel.text = "\(currentTimeSeconds % 100)"
         
-        timeLabel.text = "\(currentTimeSeconds / 6000) : \(currentTimeSeconds / 100) : \(currentTimeSeconds % 100)"
+        let centisecondsValue = currentTimeSeconds % 100
+        let secondsValue = currentTimeSeconds / 100 % 60
+        let minutesValue = currentTimeSeconds / 6000 % 60
+        
+        timeLabel.text = String(format: "%02d : %02d : %02d", minutesValue, secondsValue, centisecondsValue)
     }
     
     //@IBOutlets
-    @IBOutlet weak var minutesLabel: UILabel!
-    @IBOutlet weak var secondsLabel: UILabel!
     @IBOutlet weak var startButtonView: UIButton!
     @IBOutlet weak var pauseButtonView: UIButton!
     @IBOutlet weak var resetButtonView: UIButton!
-    
     @IBOutlet weak var timeLabel: UILabel!
     
     //@IBActions
@@ -50,8 +49,6 @@ class ViewController: UIViewController {
     @IBAction func pressResetButton(_ sender: UIButton) {
         timer.invalidate()
         currentTimeSeconds = 0
-        minutesLabel.text = "0"
-        secondsLabel.text = "0"
         pauseButtonView.isHidden = true
         startButtonView.isHidden = false
         
