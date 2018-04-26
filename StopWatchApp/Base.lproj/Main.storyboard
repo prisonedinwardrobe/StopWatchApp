@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,95 +19,125 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAV-Yy-B4A" userLabel="Black">
-                                <rect key="frame" x="0.0" y="20" width="375" height="323.5"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 : 00 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sE-wO-vuN" userLabel="TimeLabel">
-                                        <rect key="frame" x="49.5" y="129" width="277" height="66"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="55"/>
+                                        <rect key="frame" x="23.5" y="150" width="328" height="81.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="68"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="5sE-wO-vuN" secondAttribute="centerY" id="XTi-p8-uSY"/>
-                                    <constraint firstItem="5sE-wO-vuN" firstAttribute="centerX" secondItem="kAV-Yy-B4A" secondAttribute="centerX" id="cpk-v4-Z51"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7oN-YG-Hhd" userLabel="Red">
-                                <rect key="frame" x="0.0" y="343.5" width="187.5" height="323.5"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eak-es-k2k">
-                                        <rect key="frame" x="48" y="129" width="92" height="66"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yfi-60-Urn" userLabel="Start Button" customClass="RoundButton" customModule="StopWatchApp" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="269" width="130" height="130"/>
+                                        <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="37"/>
                                         <state key="normal" title="Start">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="65"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="pressStartButton:" destination="BYZ-38-t0r" eventType="touchDown" id="pqw-2y-m1D"/>
+                                            <action selector="pressStartButton:" destination="BYZ-38-t0r" eventType="touchDown" id="n9E-hP-Tf8"/>
+                                            <action selector="releaseStartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UAq-Zm-yz0"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9io-4e-c5X">
-                                        <rect key="frame" x="35.5" y="129" width="117" height="66"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxQ-tv-LZc" userLabel="Reset Button" customClass="RoundButton" customModule="StopWatchApp" customModuleProvider="target">
+                                        <rect key="frame" x="229" y="269" width="130" height="130"/>
+                                        <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="37"/>
+                                        <state key="normal" title="Reset"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="65"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="pressResetButton:" destination="BYZ-38-t0r" eventType="touchDown" id="cad-ME-jev"/>
+                                            <action selector="releaseResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9FF-PE-C2Y"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbk-W6-uoL" userLabel="Pause Button" customClass="RoundButton" customModule="StopWatchApp" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="269" width="130" height="130"/>
+                                        <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="37"/>
                                         <state key="normal" title="Pause">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="65"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="pressPauseButton:" destination="BYZ-38-t0r" eventType="touchDown" id="kJ7-pe-wWd"/>
+                                            <action selector="pressPauseButton:" destination="BYZ-38-t0r" eventType="touchDown" id="Yfk-BT-XZ1"/>
+                                            <action selector="releasePauseButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7pn-pk-2nu"/>
                                         </connections>
                                     </button>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HC9-f5-hNq">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="barTintColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <textAttributes key="titleTextAttributes">
+                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </textAttributes>
+                                        <items>
+                                            <navigationItem title="Stopwatch" id="2KS-DZ-cc9"/>
+                                        </items>
+                                    </navigationBar>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="eak-es-k2k" firstAttribute="centerX" secondItem="7oN-YG-Hhd" secondAttribute="centerX" id="1Wq-G9-0aM"/>
-                                    <constraint firstAttribute="centerY" secondItem="9io-4e-c5X" secondAttribute="centerY" id="7w5-yt-L22"/>
-                                    <constraint firstAttribute="centerY" secondItem="eak-es-k2k" secondAttribute="centerY" id="Rsw-lZ-yns"/>
-                                    <constraint firstItem="9io-4e-c5X" firstAttribute="centerX" secondItem="7oN-YG-Hhd" secondAttribute="centerX" id="qC0-h4-3Nt"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfC-fs-o8e" userLabel="White">
-                                <rect key="frame" x="187.5" y="343.5" width="187.5" height="323.5"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ot6-wv-B2C">
-                                        <rect key="frame" x="39" y="129" width="110" height="66"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                        <state key="normal" title="Reset">
-                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="pressResetButton:" destination="BYZ-38-t0r" eventType="touchDown" id="Vd3-0Y-9Cs"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="ot6-wv-B2C" secondAttribute="centerX" id="QD3-oU-VrA"/>
-                                    <constraint firstAttribute="centerY" secondItem="ot6-wv-B2C" secondAttribute="centerY" id="kT4-bT-zgA"/>
+                                    <constraint firstItem="dbk-W6-uoL" firstAttribute="top" secondItem="5sE-wO-vuN" secondAttribute="bottom" constant="37.5" id="3c9-zh-vNv"/>
+                                    <constraint firstAttribute="trailing" secondItem="TxQ-tv-LZc" secondAttribute="trailing" constant="16" id="6jk-I0-rzN"/>
+                                    <constraint firstAttribute="trailing" secondItem="dbk-W6-uoL" secondAttribute="trailing" constant="229" id="7Lm-7j-1zU"/>
+                                    <constraint firstAttribute="bottom" secondItem="dbk-W6-uoL" secondAttribute="bottom" constant="248" id="T5e-R5-bjm"/>
+                                    <constraint firstAttribute="bottom" secondItem="TxQ-tv-LZc" secondAttribute="bottom" constant="248" id="Unk-Wt-Kct"/>
+                                    <constraint firstItem="TxQ-tv-LZc" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" constant="229" id="W4b-Cf-TVr"/>
+                                    <constraint firstAttribute="top" secondItem="5sE-wO-vuN" secondAttribute="top" constant="-150" id="XTi-p8-uSY"/>
+                                    <constraint firstItem="5sE-wO-vuN" firstAttribute="centerX" secondItem="kAV-Yy-B4A" secondAttribute="centerX" id="cpk-v4-Z51"/>
+                                    <constraint firstItem="dbk-W6-uoL" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" constant="16" id="gPJ-Xo-zr2"/>
+                                    <constraint firstAttribute="trailing" secondItem="Yfi-60-Urn" secondAttribute="trailing" constant="229" id="qtk-rm-zHc"/>
+                                    <constraint firstItem="Yfi-60-Urn" firstAttribute="top" secondItem="5sE-wO-vuN" secondAttribute="bottom" constant="37.5" id="sYc-iX-DiP"/>
+                                    <constraint firstItem="TxQ-tv-LZc" firstAttribute="top" secondItem="5sE-wO-vuN" secondAttribute="bottom" constant="37.5" id="sex-Xr-gb6"/>
+                                    <constraint firstAttribute="bottom" secondItem="Yfi-60-Urn" secondAttribute="bottom" constant="248" id="tmh-b2-IyB"/>
+                                    <constraint firstItem="Yfi-60-Urn" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" constant="16" id="xkP-9u-xOu"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kAV-Yy-B4A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="17t-HW-vqi"/>
-                            <constraint firstItem="7oN-YG-Hhd" firstAttribute="top" secondItem="kAV-Yy-B4A" secondAttribute="bottom" id="H8R-K8-1nC"/>
-                            <constraint firstItem="7oN-YG-Hhd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LjE-Dz-0oh"/>
                             <constraint firstItem="kAV-Yy-B4A" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="R8G-l5-7FU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="centerX" secondItem="7oN-YG-Hhd" secondAttribute="trailing" id="Twi-0C-dac"/>
-                            <constraint firstItem="gfC-fs-o8e" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="b4f-qA-vJN"/>
-                            <constraint firstItem="gfC-fs-o8e" firstAttribute="leading" secondItem="7oN-YG-Hhd" secondAttribute="trailing" id="eu8-l4-NVk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gfC-fs-o8e" secondAttribute="bottom" id="nVq-pV-1MP"/>
-                            <constraint firstItem="gfC-fs-o8e" firstAttribute="top" secondItem="kAV-Yy-B4A" secondAttribute="bottom" id="qTB-9w-ag9"/>
                             <constraint firstItem="kAV-Yy-B4A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="sfE-2u-Frj"/>
-                            <constraint firstItem="7oN-YG-Hhd" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="tOp-Jg-s9c"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="centerY" secondItem="kAV-Yy-B4A" secondAttribute="bottom" id="zbH-Tm-r5Z"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kAV-Yy-B4A" secondAttribute="bottom" id="zbH-Tm-r5Z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="pauseButtonView" destination="9io-4e-c5X" id="KCi-ix-9ME"/>
-                        <outlet property="resetButtonView" destination="ot6-wv-B2C" id="hIj-8p-reb"/>
-                        <outlet property="startButtonView" destination="eak-es-k2k" id="dHO-z3-p8x"/>
+                        <outlet property="pauseButtonView" destination="dbk-W6-uoL" id="9rd-Rq-klS"/>
+                        <outlet property="resetButtonView" destination="TxQ-tv-LZc" id="oy0-bz-MM2"/>
+                        <outlet property="startButtonView" destination="Yfi-60-Urn" id="jRQ-gV-vT7"/>
                         <outlet property="timeLabel" destination="5sE-wO-vuN" id="VZU-Hj-8Cl"/>
                     </connections>
                 </viewController>
