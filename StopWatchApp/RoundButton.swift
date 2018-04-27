@@ -11,10 +11,20 @@ import UIKit
 @IBDesignable
 class RoundButton: UIButton {
 
-    @IBInspectable var cornerRadius: CGFloat = 0 {
+    var customColors: (highlighted: UIColor, unhighlighted: UIColor)?
+    
+    override var isHighlighted: Bool {
         didSet {
-            self.layer.cornerRadius = cornerRadius
+            if let customColors = customColors {
+                backgroundColor = isHighlighted ? customColors.highlighted : customColors.unhighlighted
+            }
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.layer.cornerRadius = self.bounds.width/2
     }
     
     @IBInspectable var borderWidth: CGFloat = 0 {

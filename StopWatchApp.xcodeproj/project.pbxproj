@@ -13,6 +13,7 @@
 		B3A0C5EA208F46BC00E400D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A0C5E8208F46BC00E400D8 /* Main.storyboard */; };
 		B3A0C5EC208F46C000E400D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A0C5EB208F46C000E400D8 /* Assets.xcassets */; };
 		B3A0C5EF208F46C000E400D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A0C5ED208F46C000E400D8 /* LaunchScreen.storyboard */; };
+		DBC63D162092EEE20098A33D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC63D152092EEE20098A33D /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B3A0C5EB208F46C000E400D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3A0C5EE208F46C000E400D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3A0C5F0208F46C000E400D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBC63D152092EEE20098A33D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				B3A0C5ED208F46C000E400D8 /* LaunchScreen.storyboard */,
 				B3A0C5F0208F46C000E400D8 /* Info.plist */,
 				B32365E3209252C700F50A6D /* RoundButton.swift */,
+				DBC63D152092EEE20098A33D /* Extensions.swift */,
 			);
 			path = StopWatchApp;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				B32365E4209252C700F50A6D /* RoundButton.swift in Sources */,
 				B3A0C5E7208F46BC00E400D8 /* ViewController.swift in Sources */,
 				B3A0C5E5208F46BC00E400D8 /* AppDelegate.swift in Sources */,
+				DBC63D162092EEE20098A33D /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,8 +288,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 93A5P733D9;
 				INFOPLIST_FILE = StopWatchApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -303,8 +308,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 93A5P733D9;
 				INFOPLIST_FILE = StopWatchApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
