@@ -40,13 +40,13 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 : 00 : 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sE-wO-vuN" userLabel="TimeLabel">
-                                        <rect key="frame" x="23.5" y="150" width="328" height="81.5"/>
+                                        <rect key="frame" x="23.5" y="100" width="328" height="81.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="68"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yfi-60-Urn" userLabel="Start Button" customClass="RoundButton" customModule="StopWatchApp" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="269" width="130" height="130"/>
+                                        <rect key="frame" x="16" y="219" width="130" height="130"/>
                                         <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="130" id="PEm-ST-QY1"/>
@@ -61,7 +61,7 @@
                                                 <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -69,7 +69,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxQ-tv-LZc" userLabel="Reset Button" customClass="RoundButton" customModule="StopWatchApp" customModuleProvider="target">
-                                        <rect key="frame" x="229" y="269" width="130" height="130"/>
+                                        <rect key="frame" x="229" y="219" width="130" height="130"/>
                                         <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="TxQ-tv-LZc" secondAttribute="height" id="sbC-7F-1vS"/>
@@ -77,23 +77,60 @@
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="37"/>
                                         <state key="normal" title="Reset"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="releaseResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9FF-PE-C2Y"/>
                                         </connections>
                                     </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BLT-8q-IXL">
+                                        <rect key="frame" x="0.0" y="379" width="375" height="224"/>
+                                        <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="lapsTableViewCell" textLabel="49Z-rh-cyy" detailTextLabel="4Iw-aL-SkL" rowHeight="46" style="IBUITableViewCellStyleValue1" id="4XQ-EE-ZDb">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="46"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4XQ-EE-ZDb" id="RHk-z2-2EQ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="45.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="49Z-rh-cyy">
+                                                            <rect key="frame" x="15" y="13" width="33.5" height="20.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Iw-aL-SkL">
+                                                            <rect key="frame" x="316" y="13" width="44" height="20.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="TxQ-tv-LZc" firstAttribute="height" secondItem="Yfi-60-Urn" secondAttribute="height" id="3zU-ZH-gWd"/>
+                                    <constraint firstAttribute="trailing" secondItem="BLT-8q-IXL" secondAttribute="trailing" id="6ra-gY-PBi"/>
                                     <constraint firstItem="TxQ-tv-LZc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Yfi-60-Urn" secondAttribute="trailing" id="HW6-Pt-1uw"/>
-                                    <constraint firstAttribute="top" secondItem="5sE-wO-vuN" secondAttribute="top" constant="-150" id="XTi-p8-uSY"/>
+                                    <constraint firstAttribute="bottom" secondItem="BLT-8q-IXL" secondAttribute="bottom" id="IRK-kC-wgZ"/>
+                                    <constraint firstAttribute="top" secondItem="5sE-wO-vuN" secondAttribute="top" constant="-100" id="XTi-p8-uSY"/>
+                                    <constraint firstItem="BLT-8q-IXL" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" id="YCq-bz-ASB"/>
+                                    <constraint firstItem="BLT-8q-IXL" firstAttribute="top" secondItem="Yfi-60-Urn" secondAttribute="bottom" constant="30" id="bbK-w2-JGd"/>
                                     <constraint firstItem="5sE-wO-vuN" firstAttribute="centerX" secondItem="kAV-Yy-B4A" secondAttribute="centerX" id="cpk-v4-Z51"/>
                                     <constraint firstItem="TxQ-tv-LZc" firstAttribute="centerY" secondItem="Yfi-60-Urn" secondAttribute="centerY" id="jHk-8u-JxA"/>
                                     <constraint firstItem="Yfi-60-Urn" firstAttribute="top" secondItem="5sE-wO-vuN" secondAttribute="bottom" constant="37" id="sYc-iX-DiP"/>
@@ -113,6 +150,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="StopWatch" id="vWJ-YM-FyY"/>
                     <connections>
+                        <outlet property="lapsTableView" destination="BLT-8q-IXL" id="eQ3-sM-a0U"/>
                         <outlet property="resetButtonView" destination="TxQ-tv-LZc" id="oy0-bz-MM2"/>
                         <outlet property="startButtonView" destination="Yfi-60-Urn" id="jRQ-gV-vT7"/>
                         <outlet property="timeLabel" destination="5sE-wO-vuN" id="VZU-Hj-8Cl"/>
@@ -120,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-401" y="149"/>
+            <point key="canvasLocation" x="-402.39999999999998" y="148.87556221889056"/>
         </scene>
     </scenes>
 </document>
