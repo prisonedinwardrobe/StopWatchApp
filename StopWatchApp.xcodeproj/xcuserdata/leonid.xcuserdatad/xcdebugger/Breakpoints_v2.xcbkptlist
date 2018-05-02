@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StopWatchApp/StopWatch/StopWatchViewController.swift"
-            timestampString = "546977770.061547"
+            timestampString = "546982812.349858"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "releaseResetButton(_:)"
             landmarkType = "7">
          </BreakpointContent>

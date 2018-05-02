@@ -10,18 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    //lapsTableView logic
+    //LAPSTABLEVIEW LOGIC
     var arrayOfLaps: [String] = []
     var timeWhenPressedLap = 0
     
-    //@IBOutlets
+    //@IBOUTLETS
     @IBOutlet weak var startButtonView: RoundButton!
     @IBOutlet weak var resetButtonView: RoundButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var lapsTableView: UITableView!
     @IBOutlet weak var fakeTableViewHeader: UIView!
     
-    //timer logic
+    //TIMER LOGIC
     var timer = Timer()
     var currentTimeSeconds = 0
     
@@ -29,8 +29,12 @@ class ViewController: UIViewController {
         let centisecondsValue = number % 100
         let secondsValue = number / 100 % 60
         let minutesValue = number / 6000 % 60
+        let hoursValue = number / 360000 % 60
         
-        return String(format: "%02d : %02d : %02d", minutesValue, secondsValue, centisecondsValue)
+        if number >= 360000 {
+            return String(format: "%02d : %02d : %02d , %02d", hoursValue, minutesValue, secondsValue, centisecondsValue)
+        }
+        return String(format: "%02d : %02d , %02d", minutesValue, secondsValue, centisecondsValue)
     }
     
     func runTimer() {
@@ -44,7 +48,7 @@ class ViewController: UIViewController {
         timeLabel.text = stopWatchStringFormatter(currentTimeSeconds)
     }
     
-    //default overrides
+    //DEFAULT OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,7 +73,7 @@ class ViewController: UIViewController {
 }
 
 
-// MARK: - actions
+// MARK: - ACTIONS
 
 extension ViewController {
 
@@ -99,7 +103,7 @@ extension ViewController {
             timer.invalidate()
             currentTimeSeconds = 0
             timeWhenPressedLap = 0
-            timeLabel.text = "00 : 00 : 00"
+            timeLabel.text = "00 : 00 , 00"
             arrayOfLaps = []
             lapsTableView.reloadData()
             
@@ -110,7 +114,7 @@ extension ViewController {
 }
 
 
-// MARK: - tableView
+// MARK: - TABLEVIEW
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
