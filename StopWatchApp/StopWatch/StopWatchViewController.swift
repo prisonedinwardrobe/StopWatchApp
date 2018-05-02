@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     
     //lapsTableView logic
     var arrayOfLaps: [String] = []
-    var lapNumber = 1
     var timeWhenPressedLap = 0
     
     //@IBOutlets
@@ -56,6 +55,8 @@ class ViewController: UIViewController {
         
         startButtonView.backgroundColor = UIColor.salmonBright
         resetButtonView.backgroundColor = UIColor.greyBright
+        resetButtonView.alpha = 0.2
+        resetButtonView.isEnabled = false
         
         lapsTableView.delegate = self
         lapsTableView.dataSource = self
@@ -77,18 +78,22 @@ extension ViewController {
             timer.invalidate()
             startButtonView.setTitle("Start", for: .normal)
             resetButtonView.setTitle("Reset", for: .normal)
+            
         } else {
             runTimer()
             startButtonView.setTitle("Stop", for: .normal)
             resetButtonView.setTitle("Lap", for: .normal)
+            
+            resetButtonView.alpha = 1.0
+            resetButtonView.isEnabled = true
         }
     }
     
     @IBAction func releaseResetButton(_ sender: UIButton) {
         if timer.isValid {
             arrayOfLaps.insert(stopWatchStringFormatter(currentTimeSeconds - timeWhenPressedLap), at: 0)
-            lapsTableView.reloadData()
             timeWhenPressedLap = currentTimeSeconds
+            lapsTableView.reloadData()
             
         } else {
             timer.invalidate()
@@ -97,6 +102,9 @@ extension ViewController {
             timeLabel.text = "00 : 00 : 00"
             arrayOfLaps = []
             lapsTableView.reloadData()
+            
+            resetButtonView.alpha = 0.2
+            resetButtonView.isEnabled = false
         }
     }
 }
@@ -120,13 +128,21 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.detailTextLabel?.font = UIFont.monospaced17
         cell.detailTextLabel?.text = "\(arrayOfLaps[indexPath.row])"
+        setCellTextColor(cell, indexPath)
+       
+        return cell
+    }
+    
+    func setCellTextColor(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        let time = arrayOfLaps[indexPath.row]
         
         if let max = arrayOfLaps.max(), let min = arrayOfLaps.min() {
             if arrayOfLaps.count > 1 {
-            cell.detailTextLabel?.textColor = arrayOfLaps[indexPath.row] == max ? UIColor.salmonBright : (arrayOfLaps[indexPath.row] == min ? UIColor.greenTime : UIColor.white)
+                cell.detailTextLabel?.textColor = time == max ? UIColor.salmonBright : (time == min ? UIColor.greenTime : UIColor.white)
+            } else {
+                cell.detailTextLabel?.textColor = UIColor.white
             }
         }
-        return cell
     }
 }
 
