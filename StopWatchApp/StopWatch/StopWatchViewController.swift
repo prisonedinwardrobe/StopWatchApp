@@ -12,14 +12,14 @@ class ViewController: UIViewController {
     
     //LAPSTABLEVIEW LOGIC
     var arrayOfLaps: [String] = []
-    var timeWhenPressedLap = 0
+    var detailedTextLabelTime = 0
     
     //@IBOUTLETS
     @IBOutlet weak var startButtonView: RoundButton!
     @IBOutlet weak var resetButtonView: RoundButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var lapsTableView: UITableView!
-    @IBOutlet weak var fakeTableViewHeader: UIView!
+    @IBOutlet weak var fakeTableViewHeaderHeightConstraint: NSLayoutConstraint!
     
     //TIMER LOGIC
     var timer = Timer()
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
             return String(format: "%02d : %02d : %02d , %02d", hoursValue, minutesValue, secondsValue, centisecondsValue)
         }
         return String(format: "%02d : %02d , %02d", minutesValue, secondsValue, centisecondsValue)
-    }
+    } 
     
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
@@ -44,8 +44,10 @@ class ViewController: UIViewController {
     
     @objc func updateTimer() {
         currentTimeSeconds += 1
+        detailedTextLabelTime += 1
         
         timeLabel.text = stopWatchStringFormatter(currentTimeSeconds)
+        lapsTableView.cellForRow(at: [0,0])?.detailTextLabel?.text = stopWatchStringFormatter(detailedTextLabelTime)
     }
     
     //DEFAULT OVERRIDES
@@ -53,7 +55,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         timeLabel.font = UIFont.monospaced68
-    
+        
         startButtonView.customColors = (UIColor.salmonDimmed, UIColor.salmonBright)
         resetButtonView.customColors = (UIColor.greyDimmed, UIColor.greyBright)
         
@@ -64,19 +66,17 @@ class ViewController: UIViewController {
         
         lapsTableView.delegate = self
         lapsTableView.dataSource = self
+        
+        fakeTableViewHeaderHeightConstraint.constant = 0.5
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        fakeTableViewHeader.addConstraint(NSLayoutConstraint(item: fakeTableViewHeader, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 0.5))
-    }
 }
 
 
 // MARK: - ACTIONS
 
 extension ViewController {
-
+    
     @IBAction func releaseStartButton(_ sender: UIButton) {
         if timer.isValid {
             timer.invalidate()
@@ -84,6 +84,10 @@ extension ViewController {
             resetButtonView.setTitle("Reset", for: .normal)
             
         } else {
+            if arrayOfLaps.count == 0 {
+                arrayOfLaps.insert(stopWatchStringFormatter(currentTimeSeconds), at: 0)
+                lapsTableView.reloadData()
+            }
             runTimer()
             startButtonView.setTitle("Stop", for: .normal)
             resetButtonView.setTitle("Lap", for: .normal)
@@ -95,14 +99,15 @@ extension ViewController {
     
     @IBAction func releaseResetButton(_ sender: UIButton) {
         if timer.isValid {
-            arrayOfLaps.insert(stopWatchStringFormatter(currentTimeSeconds - timeWhenPressedLap), at: 0)
-            timeWhenPressedLap = currentTimeSeconds
+            arrayOfLaps[0] = stopWatchStringFormatter(detailedTextLabelTime)
+            arrayOfLaps.insert(stopWatchStringFormatter(0), at: 0)
+            detailedTextLabelTime = 0
             lapsTableView.reloadData()
             
         } else {
             timer.invalidate()
             currentTimeSeconds = 0
-            timeWhenPressedLap = 0
+            detailedTextLabelTime = 0
             timeLabel.text = "00 : 00 , 00"
             arrayOfLaps = []
             lapsTableView.reloadData()
@@ -123,30 +128,21 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = lapsTableView.dequeueReusableCell(withIdentifier: "lapsTableViewCell") else {
-            return UITableViewCell()
+        var arrayOfLapsCopy = arrayOfLaps
+        if arrayOfLaps.count > 1 {
+            arrayOfLapsCopy = Array(arrayOfLaps[1...arrayOfLaps.count - 1])
+        }
+        guard let cell = lapsTableView.dequeueReusableCell(withIdentifier: "lapsTableViewCell") as? CustomTableViewCell,
+              let max = arrayOfLapsCopy.max(),
+              let min = arrayOfLapsCopy.min() else {
+              return UITableViewCell()
         }
         
-        cell.textLabel?.font = UIFont.monospaced17
-        cell.textLabel?.text = "Lap \(arrayOfLaps.count - indexPath.row)"
-        
-        cell.detailTextLabel?.font = UIFont.monospaced17
-        cell.detailTextLabel?.text = "\(arrayOfLaps[indexPath.row])"
-        setCellTextColor(cell, indexPath)
-       
+        let text = arrayOfLaps[indexPath.row]
+        let color = (text == max && arrayOfLaps.count > 1) ? UIColor.salmonBright : (text == min && arrayOfLaps.count > 1) ? UIColor.greenTime : UIColor.white
+        cell.setupCell(for: arrayOfLaps.count - indexPath.row, text: text, textColor: color)
         return cell
     }
-    
-    func setCellTextColor(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        let time = arrayOfLaps[indexPath.row]
-        
-        if let max = arrayOfLaps.max(), let min = arrayOfLaps.min() {
-            if arrayOfLaps.count > 1 {
-                cell.detailTextLabel?.textColor = time == max ? UIColor.salmonBright : (time == min ? UIColor.greenTime : UIColor.white)
-            } else {
-                cell.detailTextLabel?.textColor = UIColor.white
-            }
-        }
-    }
 }
+
 
