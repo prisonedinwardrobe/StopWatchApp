@@ -139,7 +139,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let text = arrayOfLaps[indexPath.row]
-        let color = (text == max && arrayOfLaps.count > 1) ? UIColor.salmonBright : (text == min && arrayOfLaps.count > 1) ? UIColor.greenTime : UIColor.white
+        let color = (text == max && arrayOfLaps.count > 2) ? UIColor.salmonBright : (text == min && arrayOfLaps.count > 2) ? UIColor.greenTime : UIColor.white
         cell.setupCell(for: arrayOfLaps.count - indexPath.row, text: text, textColor: color)
         return cell
     }
