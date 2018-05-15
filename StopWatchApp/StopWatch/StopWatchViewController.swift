@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     //LAPSTABLEVIEW LOGIC
     var arrayOfLaps: [String] = []
-    var detailedTextLabelTime = 0
+    var detailedTextLabelCentiseconds = 0
     
     //@IBOUTLETS
     @IBOutlet weak var startButtonView: RoundButton!
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
     //TIMER LOGIC
     var timer = Timer()
-    var currentTimeSeconds = 0
+    var timeLabelCentiseconds = 0
     
     func stopWatchStringFormatter(_ number: Int) -> String {
         let centisecondsValue = number % 100
@@ -43,11 +43,11 @@ class ViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        currentTimeSeconds += 1
-        detailedTextLabelTime += 1
+        timeLabelCentiseconds += 1
+        detailedTextLabelCentiseconds += 1
         
-        timeLabel.text = stopWatchStringFormatter(currentTimeSeconds)
-        lapsTableView.cellForRow(at: [0,0])?.detailTextLabel?.text = stopWatchStringFormatter(detailedTextLabelTime)
+        timeLabel.text = stopWatchStringFormatter(timeLabelCentiseconds)
+        lapsTableView.cellForRow(at: [0,0])?.detailTextLabel?.text = stopWatchStringFormatter(detailedTextLabelCentiseconds)
     }
     
     //DEFAULT OVERRIDES
@@ -85,7 +85,7 @@ extension ViewController {
             
         } else {
             if arrayOfLaps.count == 0 {
-                arrayOfLaps.insert(stopWatchStringFormatter(currentTimeSeconds), at: 0)
+                arrayOfLaps.insert(stopWatchStringFormatter(timeLabelCentiseconds), at: 0)
                 lapsTableView.reloadData()
             }
             runTimer()
@@ -99,15 +99,15 @@ extension ViewController {
     
     @IBAction func releaseResetButton(_ sender: UIButton) {
         if timer.isValid {
-            arrayOfLaps[0] = stopWatchStringFormatter(detailedTextLabelTime)
-            arrayOfLaps.insert(stopWatchStringFormatter(0), at: 0)
-            detailedTextLabelTime = 0
+            arrayOfLaps[0] = stopWatchStringFormatter(detailedTextLabelCentiseconds)
+            arrayOfLaps.insert("0", at: 0)
+            detailedTextLabelCentiseconds = 0
             lapsTableView.reloadData()
             
         } else {
             timer.invalidate()
-            currentTimeSeconds = 0
-            detailedTextLabelTime = 0
+            timeLabelCentiseconds = 0
+            detailedTextLabelCentiseconds = 0
             timeLabel.text = "00 : 00 , 00"
             arrayOfLaps = []
             lapsTableView.reloadData()
@@ -141,6 +141,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let text = arrayOfLaps[indexPath.row]
         let color = (text == max && arrayOfLaps.count > 2) ? UIColor.salmonBright : (text == min && arrayOfLaps.count > 2) ? UIColor.greenTime : UIColor.white
         cell.setupCell(for: arrayOfLaps.count - indexPath.row, text: text, textColor: color)
+        
         return cell
     }
 }
