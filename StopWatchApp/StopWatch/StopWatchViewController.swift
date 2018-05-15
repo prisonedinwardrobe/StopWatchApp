@@ -19,7 +19,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var resetButtonView: RoundButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var lapsTableView: UITableView!
+    
     @IBOutlet weak var fakeTableViewHeaderHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var timeLabelWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewWidthConstraint: NSLayoutConstraint!
     
     //TIMER LOGIC
     var timer = Timer()
@@ -54,6 +58,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViewConstants()
+        setupViewConstraints()
+    }
+}
+
+
+// MARK: - SETUP FUNCTIONS
+
+extension ViewController {
+    
+    fileprivate func setupViewConstants() {
         timeLabel.font = UIFont.monospaced68
         
         startButtonView.customColors = (UIColor.salmonDimmed, UIColor.salmonBright)
@@ -66,12 +81,15 @@ class ViewController: UIViewController {
         
         lapsTableView.delegate = self
         lapsTableView.dataSource = self
-        
-        fakeTableViewHeaderHeightConstraint.constant = 0.5
     }
     
+    fileprivate func setupViewConstraints() {
+        fakeTableViewHeaderHeightConstraint.constant = 0.5
+        timeLabelWidthConstraint.constant = view.frame.width
+        imageViewWidthConstraint.constant = view.frame.width
+        scrollViewWidthConstraint.constant = view.frame.width
+    }
 }
-
 
 // MARK: - ACTIONS
 

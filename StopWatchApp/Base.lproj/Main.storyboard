@@ -31,27 +31,55 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NnP-vB-ACS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1184" y="149"/>
+            <point key="canvasLocation" x="-1452" y="148"/>
         </scene>
         <!--StopWatch-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StopWatchApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="750" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAV-Yy-B4A" userLabel="Black">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="64" width="750" height="672"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="00 : 00 , 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="34" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5sE-wO-vuN" userLabel="TimeLabel">
-                                        <rect key="frame" x="1" y="70" width="412" height="79"/>
-                                        <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="68"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8f-QM-4pQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="750" height="250"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="00 : 00 , 00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="34" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5sE-wO-vuN" userLabel="TimeLabel">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="375" id="Zdv-69-yOC"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="68"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clockFace" translatesAutoresizingMaskIntoConstraints="NO" id="JyG-3B-Rd7">
+                                                <rect key="frame" x="375" y="0.0" width="375" height="250"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="375" id="MeB-S8-TaD"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="750" id="ArX-a3-7Vx"/>
+                                            <constraint firstAttribute="bottom" secondItem="5sE-wO-vuN" secondAttribute="bottom" id="Eei-ln-Nvx"/>
+                                            <constraint firstItem="JyG-3B-Rd7" firstAttribute="leading" secondItem="5sE-wO-vuN" secondAttribute="trailing" id="Itt-Y6-gEp"/>
+                                            <constraint firstAttribute="bottom" secondItem="JyG-3B-Rd7" secondAttribute="bottom" id="Mqy-zP-5lv"/>
+                                            <constraint firstItem="5sE-wO-vuN" firstAttribute="leading" secondItem="m8f-QM-4pQ" secondAttribute="leading" id="TQ3-iq-uoq"/>
+                                            <constraint firstAttribute="trailing" secondItem="JyG-3B-Rd7" secondAttribute="trailing" id="cT5-bj-OuM"/>
+                                            <constraint firstItem="JyG-3B-Rd7" firstAttribute="centerY" secondItem="m8f-QM-4pQ" secondAttribute="centerY" id="dij-ts-TSd"/>
+                                            <constraint firstItem="JyG-3B-Rd7" firstAttribute="top" secondItem="m8f-QM-4pQ" secondAttribute="top" id="fmz-jI-TYS"/>
+                                            <constraint firstItem="JyG-3B-Rd7" firstAttribute="leading" secondItem="5sE-wO-vuN" secondAttribute="trailing" id="g8c-7Y-arJ"/>
+                                            <constraint firstItem="5sE-wO-vuN" firstAttribute="centerY" secondItem="m8f-QM-4pQ" secondAttribute="centerY" id="kpe-YG-i8f"/>
+                                            <constraint firstItem="5sE-wO-vuN" firstAttribute="top" secondItem="m8f-QM-4pQ" secondAttribute="top" id="kso-wn-tuP"/>
+                                            <constraint firstAttribute="height" constant="250" id="r8e-t4-mDJ"/>
+                                        </constraints>
+                                    </scrollView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yfi-60-Urn" userLabel="Start Button" customClass="RoundButton" customModule="StopWatchApp" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="186" width="100" height="100"/>
+                                        <rect key="frame" x="16" y="200" width="100" height="100"/>
                                         <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="PEm-ST-QY1"/>
@@ -71,17 +99,17 @@
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" bouncesZoom="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BLT-8q-IXL">
-                                        <rect key="frame" x="0.0" y="302" width="414" height="370"/>
+                                        <rect key="frame" x="0.0" y="316" width="750" height="356"/>
                                         <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="separatorColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                         <color key="sectionIndexBackgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="lapsTableViewCell" textLabel="49Z-rh-cyy" detailTextLabel="4Iw-aL-SkL" rowHeight="50" style="IBUITableViewCellStyleValue1" id="4XQ-EE-ZDb" customClass="CustomTableViewCell" customModule="StopWatchApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="28" width="750" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4XQ-EE-ZDb" id="RHk-z2-2EQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="750" height="49.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="49Z-rh-cyy">
@@ -92,7 +120,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Iw-aL-SkL">
-                                                            <rect key="frame" x="350" y="14.999999999999998" width="44" height="20.333333333333332"/>
+                                                            <rect key="frame" x="686" y="14.999999999999998" width="44" height="20.333333333333332"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -106,7 +134,7 @@
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TxQ-tv-LZc" userLabel="Reset Button" customClass="RoundButton" customModule="StopWatchApp" customModuleProvider="target">
-                                        <rect key="frame" x="298" y="186" width="100" height="100"/>
+                                        <rect key="frame" x="634" y="200" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="TxQ-tv-LZc" secondAttribute="height" id="sbC-7F-1vS"/>
@@ -124,7 +152,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6so-wk-uvL" userLabel="Fake TableView Header">
-                                        <rect key="frame" x="16" y="302" width="382" height="0.0"/>
+                                        <rect key="frame" x="16" y="316" width="718" height="0.0"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="5rZ-eM-EIg"/>
@@ -134,21 +162,20 @@
                                 <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="6so-wk-uvL" firstAttribute="leading" secondItem="BLT-8q-IXL" secondAttribute="leading" constant="16" id="1Sp-ir-k8Q"/>
+                                    <constraint firstItem="m8f-QM-4pQ" firstAttribute="bottom" secondItem="Yfi-60-Urn" secondAttribute="centerY" id="2Bo-uT-hXv"/>
                                     <constraint firstItem="TxQ-tv-LZc" firstAttribute="height" secondItem="Yfi-60-Urn" secondAttribute="height" id="3zU-ZH-gWd"/>
+                                    <constraint firstItem="m8f-QM-4pQ" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" id="6p2-6a-4uD"/>
                                     <constraint firstAttribute="trailing" secondItem="BLT-8q-IXL" secondAttribute="trailing" id="6ra-gY-PBi"/>
-                                    <constraint firstItem="5sE-wO-vuN" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" constant="1" id="782-53-WOM"/>
+                                    <constraint firstItem="m8f-QM-4pQ" firstAttribute="top" secondItem="kAV-Yy-B4A" secondAttribute="top" id="D9Q-2D-pGU"/>
                                     <constraint firstItem="BLT-8q-IXL" firstAttribute="top" secondItem="6so-wk-uvL" secondAttribute="centerY" id="Gxz-6i-msA"/>
                                     <constraint firstItem="TxQ-tv-LZc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Yfi-60-Urn" secondAttribute="trailing" id="HW6-Pt-1uw"/>
                                     <constraint firstAttribute="bottom" secondItem="BLT-8q-IXL" secondAttribute="bottom" id="IRK-kC-wgZ"/>
                                     <constraint firstItem="BLT-8q-IXL" firstAttribute="trailing" secondItem="6so-wk-uvL" secondAttribute="trailing" constant="16" id="P23-aN-amS"/>
-                                    <constraint firstAttribute="top" secondItem="5sE-wO-vuN" secondAttribute="top" constant="-70" id="XTi-p8-uSY"/>
                                     <constraint firstItem="BLT-8q-IXL" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" id="YCq-bz-ASB"/>
-                                    <constraint firstAttribute="trailing" secondItem="5sE-wO-vuN" secondAttribute="trailing" constant="1" id="Zqn-I5-Nv0"/>
-                                    <constraint firstItem="5sE-wO-vuN" firstAttribute="centerX" secondItem="kAV-Yy-B4A" secondAttribute="centerX" id="cpk-v4-Z51"/>
                                     <constraint firstItem="TxQ-tv-LZc" firstAttribute="centerY" secondItem="Yfi-60-Urn" secondAttribute="centerY" id="jHk-8u-JxA"/>
                                     <constraint firstItem="BLT-8q-IXL" firstAttribute="top" secondItem="Yfi-60-Urn" secondAttribute="bottom" constant="16" id="kCp-ih-4JD"/>
                                     <constraint firstItem="6so-wk-uvL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Yfi-60-Urn" secondAttribute="bottom" id="kMC-mL-fgd"/>
-                                    <constraint firstItem="Yfi-60-Urn" firstAttribute="top" secondItem="5sE-wO-vuN" secondAttribute="bottom" constant="37" id="sYc-iX-DiP"/>
+                                    <constraint firstAttribute="trailing" secondItem="m8f-QM-4pQ" secondAttribute="trailing" id="qaY-Tv-3cc"/>
                                     <constraint firstItem="Yfi-60-Urn" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" constant="16" id="xkP-9u-xOu"/>
                                     <constraint firstAttribute="trailing" secondItem="TxQ-tv-LZc" secondAttribute="trailing" constant="16" id="yxM-1a-mfH"/>
                                 </constraints>
@@ -164,12 +191,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="StopWatch" id="vWJ-YM-FyY"/>
+                    <size key="freeformSize" width="750" height="736"/>
                     <connections>
                         <outlet property="fakeTableViewHeaderHeightConstraint" destination="5rZ-eM-EIg" id="jeT-3b-MmE"/>
+                        <outlet property="imageViewWidthConstraint" destination="MeB-S8-TaD" id="gnz-ZM-ZZV"/>
                         <outlet property="lapsTableView" destination="BLT-8q-IXL" id="eQ3-sM-a0U"/>
                         <outlet property="resetButtonView" destination="TxQ-tv-LZc" id="oy0-bz-MM2"/>
+                        <outlet property="scrollViewWidthConstraint" destination="ArX-a3-7Vx" id="r3T-Oe-BMV"/>
                         <outlet property="startButtonView" destination="Yfi-60-Urn" id="jRQ-gV-vT7"/>
                         <outlet property="timeLabel" destination="5sE-wO-vuN" id="VZU-Hj-8Cl"/>
+                        <outlet property="timeLabelWidthConstraint" destination="Zdv-69-yOC" id="6ez-6h-xzn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -191,4 +222,7 @@
             <point key="canvasLocation" x="-2248" y="148"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="clockFace" width="375" height="250"/>
+    </resources>
 </document>
