@@ -10,22 +10,23 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    //LAPSTABLEVIEW LOGIC
-    var arrayOfLaps: [String] = []
+// MARK: - LAPSTABLEVIEW LOGIC
+    var arrayOfLaps: [Int] = []
     var detailedTextLabelCentiseconds = 0
     
-    //@IBOUTLETS
+// MARK: - @IBOUTLETS
     @IBOutlet weak var startButtonView: RoundButton!
     @IBOutlet weak var resetButtonView: RoundButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var lapsTableView: UITableView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var fakeTableViewHeaderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeLabelWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollViewWidthConstraint: NSLayoutConstraint!
     
-    //TIMER LOGIC
+// MARK: - TIMER LOGIC
     var timer = Timer()
     var timeLabelCentiseconds = 0
     
@@ -54,42 +55,19 @@ class ViewController: UIViewController {
         lapsTableView.cellForRow(at: [0,0])?.detailTextLabel?.text = stopWatchStringFormatter(detailedTextLabelCentiseconds)
     }
     
-    //DEFAULT OVERRIDES
+// MARK: - DEFAULT OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupViewConstants()
+        setupViewVisuals()
         setupViewConstraints()
-    }
-}
-
-
-// MARK: - SETUP FUNCTIONS
-
-extension ViewController {
-    
-    fileprivate func setupViewConstants() {
-        timeLabel.font = UIFont.monospaced68
         
-        startButtonView.customColors = (UIColor.salmonDimmed, UIColor.salmonBright)
-        resetButtonView.customColors = (UIColor.greyDimmed, UIColor.greyBright)
-        
-        startButtonView.backgroundColor = UIColor.salmonBright
-        resetButtonView.backgroundColor = UIColor.greyBright
-        resetButtonView.alpha = 0.2
-        resetButtonView.isEnabled = false
-        
-        lapsTableView.delegate = self
-        lapsTableView.dataSource = self
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.delegate = self
+        }
     }
     
-    fileprivate func setupViewConstraints() {
-        fakeTableViewHeaderHeightConstraint.constant = 0.5
-        timeLabelWidthConstraint.constant = view.frame.width
-        imageViewWidthConstraint.constant = view.frame.width
-        scrollViewWidthConstraint.constant = view.frame.width
-    }
 }
+
 
 // MARK: - ACTIONS
 
@@ -103,7 +81,7 @@ extension ViewController {
             
         } else {
             if arrayOfLaps.count == 0 {
-                arrayOfLaps.insert(stopWatchStringFormatter(timeLabelCentiseconds), at: 0)
+                arrayOfLaps.insert(timeLabelCentiseconds, at: 0)
                 lapsTableView.reloadData()
             }
             runTimer()
@@ -117,8 +95,9 @@ extension ViewController {
     
     @IBAction func releaseResetButton(_ sender: UIButton) {
         if timer.isValid {
-            arrayOfLaps[0] = stopWatchStringFormatter(detailedTextLabelCentiseconds)
-            arrayOfLaps.insert("0", at: 0)
+            arrayOfLaps[0] = detailedTextLabelCentiseconds
+            arrayOfLaps.insert(0, at: 0)
+            
             detailedTextLabelCentiseconds = 0
             lapsTableView.reloadData()
             
@@ -132,6 +111,8 @@ extension ViewController {
             
             resetButtonView.alpha = 0.2
             resetButtonView.isEnabled = false
+            
+            releaseSavedData()
         }
     }
 }
@@ -158,10 +139,137 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let text = arrayOfLaps[indexPath.row]
         let color = (text == max && arrayOfLaps.count > 2) ? UIColor.salmonBright : (text == min && arrayOfLaps.count > 2) ? UIColor.greenTime : UIColor.white
-        cell.setupCell(for: arrayOfLaps.count - indexPath.row, text: text, textColor: color)
+        cell.setupCell(for: arrayOfLaps.count - indexPath.row, text: stopWatchStringFormatter(text), textColor: color)
         
         return cell
     }
 }
+
+
+// MARK: - SETUP FUNCTIONS
+
+extension ViewController {
+    
+    fileprivate func setupViewVisuals() {
+        timeLabel.font = UIFont.monospaced68
+        
+        startButtonView.customColors = (UIColor.salmonDimmed, UIColor.salmonBright)
+        resetButtonView.customColors = (UIColor.greyDimmed, UIColor.greyBright)
+        
+        startButtonView.backgroundColor = UIColor.salmonBright
+        resetButtonView.backgroundColor = UIColor.greyBright
+        resetButtonView.alpha = 0.2
+        resetButtonView.isEnabled = false
+        
+        lapsTableView.delegate = self
+        lapsTableView.dataSource = self
+    }
+    
+    fileprivate func setupViewConstraints() {
+        fakeTableViewHeaderHeightConstraint.constant = 0.5
+        timeLabelWidthConstraint.constant = view.frame.width
+        imageViewWidthConstraint.constant = view.frame.width
+        scrollViewWidthConstraint.constant = view.frame.width
+        
+        scrollView.contentSize = CGSize(width: view.frame.width * 2, height: 0)
+    }
+}
+
+
+// MARK: - BACKGROUND LOGIC
+
+protocol ViewControllerDelegate :class {
+    func appDidEnterBG()
+    func appWillEnterFG()
+    func appWillDie()
+    //func appSetupAfterDeath()
+}
+
+extension ViewController: ViewControllerDelegate {
+    func appDidEnterBG() {
+        if timer.isValid {
+            UserDefaults.standard.set(Date(), forKey: "DateWhenEnteredBG")
+            print("adebg works")
+        }
+    }
+    
+    func appWillEnterFG() {
+        if timer.isValid {
+            if let startDate = UserDefaults.standard.object(forKey: "DateWhenEnteredBG") as? Date {
+                refreshUI(adding: countTimeDifference(from: startDate))
+                print("aweFG works")
+            }
+        }
+    }
+
+    func appWillDie() {
+        if timer.isValid {
+            UserDefaults.standard.set(Date(), forKey: "DateWhenTerminated&Running")
+        } else {
+            UserDefaults.standard.set(timeLabelCentiseconds, forKey: "InfoWhenTerminated&Paused")
+        }
+    }
+    
+//    func appSetupAfterDeath() {
+//        if let runningDeathDate = UserDefaults.standard.object(forKey: "DateWhenTerminated&Running") as? Date {
+//            runTimer()
+//            startButtonView.setTitle("Stop", for: .normal)
+//            resetButtonView.setTitle("Lap", for: .normal)
+//
+//            resetButtonView.alpha = 1.0
+//            resetButtonView.isEnabled = true
+//
+//        print("setup has been called")
+//
+//            refreshUI(adding: countTimeDifference(from: runningDeathDate))
+//        }
+//
+//        if let pausedDeathDate = UserDefaults.standard.object(forKey: "InfoWhenTerminated&Paused") as? (Int, [String]) {
+//            refreshUIafterPausedDeath(time: pausedDeathDate.0, array: pausedDeathDate.1)
+//        }
+//    }
+    
+    func refreshUI(adding value: Int) {
+        timeLabelCentiseconds += value
+        detailedTextLabelCentiseconds += value
+    }
+    
+//    func refreshUIafterPausedDeath(time: Int, array: [String]) {
+//        timeLabelCentiseconds += time
+//        detailedTextLabelCentiseconds += time
+//        timeLabel.text = stopWatchStringFormatter(timeLabelCentiseconds)
+//        lapsTableView.cellForRow(at: [0,0])?.detailTextLabel?.text = stopWatchStringFormatter(detailedTextLabelCentiseconds)
+//        arrayOfLaps = array
+//
+//        resetButtonView.setTitle("Reset", for: .normal)
+//        resetButtonView.alpha = 1.0
+//        resetButtonView.isEnabled = true
+//    }
+    
+    func countTimeDifference(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute, .second, .nanosecond], from: date, to: Date())
+        
+        guard let hour = components.hour, let minute = components.minute, let second = components.second, let nanosecond = components.nanosecond else { return 0 }
+        return  (hour * 360000) + (minute * 6000) + (second * 100) + (nanosecond / 10000000)
+    }
+    
+    func releaseSavedData() {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: "DateWhenEnteredBG") != nil {
+            defaults.removeObject(forKey: "DateWhenEnteredBG")
+            print("dateWhenEnteredBG deleted")
+        }
+        if defaults.object(forKey: "DateWhenTerminated&Running") != nil {
+            defaults.removeObject(forKey: "DateWhenTerminated&Running")
+        }
+        if defaults.object(forKey: "InfoWhenTerminated&Paused") != nil  {
+            defaults.removeObject(forKey: "InfoWhenTerminated&Paused")
+        }
+    }
+  
+}
+
+
 
 

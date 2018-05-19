@@ -36,7 +36,7 @@
         <!--StopWatch-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StopWatchApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="StopWatchApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="750" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,16 +64,14 @@
                                             </imageView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="750" id="ArX-a3-7Vx"/>
-                                            <constraint firstAttribute="bottom" secondItem="5sE-wO-vuN" secondAttribute="bottom" id="Eei-ln-Nvx"/>
+                                            <constraint firstAttribute="width" priority="750" constant="750" id="ArX-a3-7Vx"/>
                                             <constraint firstItem="JyG-3B-Rd7" firstAttribute="leading" secondItem="5sE-wO-vuN" secondAttribute="trailing" id="Itt-Y6-gEp"/>
-                                            <constraint firstAttribute="bottom" secondItem="JyG-3B-Rd7" secondAttribute="bottom" id="Mqy-zP-5lv"/>
                                             <constraint firstItem="5sE-wO-vuN" firstAttribute="leading" secondItem="m8f-QM-4pQ" secondAttribute="leading" id="TQ3-iq-uoq"/>
+                                            <constraint firstItem="JyG-3B-Rd7" firstAttribute="height" secondItem="m8f-QM-4pQ" secondAttribute="height" id="V0M-ib-BW2"/>
+                                            <constraint firstItem="5sE-wO-vuN" firstAttribute="height" secondItem="m8f-QM-4pQ" secondAttribute="height" id="XeG-ci-wu5"/>
+                                            <constraint firstAttribute="bottom" secondItem="5sE-wO-vuN" secondAttribute="bottom" id="b1m-w2-hxi"/>
                                             <constraint firstAttribute="trailing" secondItem="JyG-3B-Rd7" secondAttribute="trailing" id="cT5-bj-OuM"/>
-                                            <constraint firstItem="JyG-3B-Rd7" firstAttribute="centerY" secondItem="m8f-QM-4pQ" secondAttribute="centerY" id="dij-ts-TSd"/>
                                             <constraint firstItem="JyG-3B-Rd7" firstAttribute="top" secondItem="m8f-QM-4pQ" secondAttribute="top" id="fmz-jI-TYS"/>
-                                            <constraint firstItem="JyG-3B-Rd7" firstAttribute="leading" secondItem="5sE-wO-vuN" secondAttribute="trailing" id="g8c-7Y-arJ"/>
-                                            <constraint firstItem="5sE-wO-vuN" firstAttribute="centerY" secondItem="m8f-QM-4pQ" secondAttribute="centerY" id="kpe-YG-i8f"/>
                                             <constraint firstItem="5sE-wO-vuN" firstAttribute="top" secondItem="m8f-QM-4pQ" secondAttribute="top" id="kso-wn-tuP"/>
                                             <constraint firstAttribute="height" constant="250" id="r8e-t4-mDJ"/>
                                         </constraints>
@@ -197,6 +195,7 @@
                         <outlet property="imageViewWidthConstraint" destination="MeB-S8-TaD" id="gnz-ZM-ZZV"/>
                         <outlet property="lapsTableView" destination="BLT-8q-IXL" id="eQ3-sM-a0U"/>
                         <outlet property="resetButtonView" destination="TxQ-tv-LZc" id="oy0-bz-MM2"/>
+                        <outlet property="scrollView" destination="m8f-QM-4pQ" id="gUR-bA-3Mi"/>
                         <outlet property="scrollViewWidthConstraint" destination="ArX-a3-7Vx" id="r3T-Oe-BMV"/>
                         <outlet property="startButtonView" destination="Yfi-60-Urn" id="jRQ-gV-vT7"/>
                         <outlet property="timeLabel" destination="5sE-wO-vuN" id="VZU-Hj-8Cl"/>
