@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var state: AppState = .justStarted
+    
 // MARK: - LAPSTABLEVIEW LOGIC
     var arrayOfLaps: [Int] = []
     var detailedTextLabelCentiseconds = 0
@@ -58,8 +60,10 @@ class ViewController: UIViewController {
 // MARK: - DEFAULT OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViewVisuals()
         setupViewConstraints()
+        appSetupAfterDeath()
         
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.delegate = self
@@ -79,6 +83,7 @@ extension ViewController {
             startButtonView.setTitle("Start", for: .normal)
             resetButtonView.setTitle("Reset", for: .normal)
             
+            state = .paused
         } else {
             if arrayOfLaps.count == 0 {
                 arrayOfLaps.insert(timeLabelCentiseconds, at: 0)
@@ -90,6 +95,8 @@ extension ViewController {
             
             resetButtonView.alpha = 1.0
             resetButtonView.isEnabled = true
+            
+            state = .running
         }
     }
     
@@ -113,6 +120,7 @@ extension ViewController {
             resetButtonView.isEnabled = false
             
             releaseSavedData()
+            state = .justStarted
         }
     }
 }
@@ -182,7 +190,6 @@ protocol ViewControllerDelegate :class {
     func appDidEnterBG()
     func appWillEnterFG()
     func appWillDie()
-    //func appSetupAfterDeath()
 }
 
 extension ViewController: ViewControllerDelegate {
@@ -202,73 +209,86 @@ extension ViewController: ViewControllerDelegate {
         }
     }
 
-    func appWillDie() {
-        if timer.isValid {
-            UserDefaults.standard.set(Date(), forKey: "DateWhenTerminated&Running")
+    func refreshUI(adding value: Int) {
+        if value < 0 {
+            startButtonView.sendActions(for: .touchUpInside)
+            print("value was <0: date has probably been changed to earlier")
         } else {
-            UserDefaults.standard.set(timeLabelCentiseconds, forKey: "InfoWhenTerminated&Paused")
+            timeLabelCentiseconds += value
+            detailedTextLabelCentiseconds += value
         }
     }
-    
-//    func appSetupAfterDeath() {
-//        if let runningDeathDate = UserDefaults.standard.object(forKey: "DateWhenTerminated&Running") as? Date {
-//            runTimer()
-//            startButtonView.setTitle("Stop", for: .normal)
-//            resetButtonView.setTitle("Lap", for: .normal)
-//
-//            resetButtonView.alpha = 1.0
-//            resetButtonView.isEnabled = true
-//
-//        print("setup has been called")
-//
-//            refreshUI(adding: countTimeDifference(from: runningDeathDate))
-//        }
-//
-//        if let pausedDeathDate = UserDefaults.standard.object(forKey: "InfoWhenTerminated&Paused") as? (Int, [String]) {
-//            refreshUIafterPausedDeath(time: pausedDeathDate.0, array: pausedDeathDate.1)
-//        }
-//    }
-    
-    func refreshUI(adding value: Int) {
-        timeLabelCentiseconds += value
-        detailedTextLabelCentiseconds += value
-    }
-    
-//    func refreshUIafterPausedDeath(time: Int, array: [String]) {
-//        timeLabelCentiseconds += time
-//        detailedTextLabelCentiseconds += time
-//        timeLabel.text = stopWatchStringFormatter(timeLabelCentiseconds)
-//        lapsTableView.cellForRow(at: [0,0])?.detailTextLabel?.text = stopWatchStringFormatter(detailedTextLabelCentiseconds)
-//        arrayOfLaps = array
-//
-//        resetButtonView.setTitle("Reset", for: .normal)
-//        resetButtonView.alpha = 1.0
-//        resetButtonView.isEnabled = true
-//    }
     
     func countTimeDifference(from date: Date) -> Int {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute, .second, .nanosecond], from: date, to: Date())
         
         guard let hour = components.hour, let minute = components.minute, let second = components.second, let nanosecond = components.nanosecond else { return 0 }
+        
         return  (hour * 360000) + (minute * 6000) + (second * 100) + (nanosecond / 10000000)
     }
     
     func releaseSavedData() {
         let defaults = UserDefaults.standard
-        if defaults.object(forKey: "DateWhenEnteredBG") != nil {
-            defaults.removeObject(forKey: "DateWhenEnteredBG")
-            print("dateWhenEnteredBG deleted")
-        }
-        if defaults.object(forKey: "DateWhenTerminated&Running") != nil {
-            defaults.removeObject(forKey: "DateWhenTerminated&Running")
-        }
-        if defaults.object(forKey: "InfoWhenTerminated&Paused") != nil  {
-            defaults.removeObject(forKey: "InfoWhenTerminated&Paused")
+        defaults.removeObject(forKey: "DeathState")
+        defaults.removeObject(forKey: "DateWhenEnteredBG")
+    }
+    
+// MARK: - TODO TERMINAITON LOGIC
+    
+    func appWillDie() {
+        if state != .justStarted {
+           let deathState = StopWatchData(time: timeLabelCentiseconds, cell: detailedTextLabelCentiseconds, array: arrayOfLaps, date: Date(), state: state)
+            saveStateToUD(info: deathState, key: "DeathState")
         }
     }
-  
+    
+    func appSetupAfterDeath() {
+        let data = retrieveStateFromUD(key: "DeathState")
+        refreshUIAfterDeath(using: data)
+    }
+    
+    func refreshUIAfterDeath(using data: StopWatchData) {
+        
+        if data.state == .running {
+            let timeToAdd = countTimeDifference(from: data.date)
+            timeLabelCentiseconds = data.time + timeToAdd
+            detailedTextLabelCentiseconds = data.cell + timeToAdd
+            arrayOfLaps = data.array
+            lapsTableView.reloadData()
+            
+            startButtonView.sendActions(for: .touchUpInside)
+            
+        } else if data.state == .paused {
+            timeLabelCentiseconds = data.time
+            detailedTextLabelCentiseconds = data.cell
+            arrayOfLaps = data.array
+            lapsTableView.reloadData()
+            
+            timeLabel.text = stopWatchStringFormatter(timeLabelCentiseconds)
+            lapsTableView.cellForRow(at: [0,0])?.detailTextLabel?.text = stopWatchStringFormatter(detailedTextLabelCentiseconds)
+        }
+    }
+    
+// MARK: - SAVING & RETRIEVING FROM USERDEFAULTS
+    func saveStateToUD(info: StopWatchData, key: String) {
+        let defaults = UserDefaults.standard
+        if let encodedData = try? JSONEncoder().encode(info){
+            defaults.set(encodedData, forKey: key)
+        }
+    }
+    func retrieveStateFromUD(key: String) -> StopWatchData {
+        let defaults = UserDefaults.standard
+        if let object = defaults.object(forKey: key) as? Data,
+           let decodedData = try? JSONDecoder().decode(StopWatchData.self, from: object) {
+           return decodedData
+        }
+           return StopWatchData()
+    }
+    
 }
+
+
 
 
 

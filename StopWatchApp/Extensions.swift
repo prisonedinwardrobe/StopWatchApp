@@ -25,4 +25,31 @@ extension UIColor {
     static let greenTime = UIColor(red:0.60, green:0.80, blue:0.50, alpha:1.0)
 }
 
+enum AppState: String, Codable {
+    case paused
+    case running
+    case justStarted
+}
 
+class StopWatchData: Codable {
+    var time: Int
+    var cell: Int
+    var array: [Int]
+    var date: Date
+    var state: AppState
+    
+    init(time: Int, cell: Int, array: [Int], date: Date, state: AppState) {
+        self.time = time
+        self.cell = cell
+        self.array = array
+        self.date = date
+        self.state = state
+    }
+    init() {
+        self.time = 0
+        self.cell = 0
+        self.array = []
+        self.date = Date()
+        self.state = .justStarted
+    }
+}
