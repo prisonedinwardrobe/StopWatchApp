@@ -74,7 +74,7 @@ extension ConverterViewController {
         }
         
         if image.image == nil {
-            image.image = #imageLiteral(resourceName: "CryptoCurrencies")
+            image.image = #imageLiteral(resourceName: "currency_salmon")
         }
     }
     
