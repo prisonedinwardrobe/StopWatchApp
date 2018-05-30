@@ -46,11 +46,10 @@ class ConverterViewController: UIViewController {
 extension ConverterViewController {
     @IBAction func pressConvert(_ sender: UIButton) {
         if textField.text != "" && textField.text != nil {
-            conversionLabel.text = String(Double(textField.text!)! * currentRate)
+            conversionLabel.isHidden = false
+            conversionLabel.text = "\(String(Double(textField.text!)! * currentRate)) USD"
         }
     }
-    
-    
 }
 
 // MARK: - SETUP FUNCTIONS
@@ -70,6 +69,7 @@ extension ConverterViewController {
     func setupVisuals() {
         convertButton.customColors = (UIColor.salmonDimmed, UIColor.salmonBright)
         convertButton.backgroundColor = UIColor.salmonBright
+        conversionLabel.isHidden = true
     }
 }
 
