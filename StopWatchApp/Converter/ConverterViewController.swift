@@ -12,8 +12,10 @@ import AlamofireImage
 
 class ConverterViewController: UIViewController {
     
+    let numberToolbar: UIToolbar = UIToolbar()
+    
 // MARK: - IMAGE
-    let imageURL = URL(string: "http://financialjuneteenth.com/wp-content/uploads/2018/02/cryptocurrency.png")
+    let imageURL = URL(string: "https://image.ibb.co/mbXyky/currency_01.png")
     
 // MARK: - CRYPTOCURRENCY VARIABLES
     var currencyArray: [String] = []
@@ -25,7 +27,6 @@ class ConverterViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var picker: UIPickerView!
-    @IBOutlet weak var convertButton: RoundButton!
     @IBOutlet weak var conversionLabel: UILabel!
     
     // MARK: - DEFAULT OVERRIDES
@@ -44,11 +45,22 @@ class ConverterViewController: UIViewController {
 
 // MARK: - ACTIONS
 extension ConverterViewController {
-    @IBAction func pressConvert(_ sender: UIButton) {
+
+    @IBAction func didEndEditing(_ sender: UITextField) {
         if textField.text != "" && textField.text != nil {
             conversionLabel.isHidden = false
             conversionLabel.text = "\(String(Double(textField.text!)! * currentRate)) USD"
         }
+    }
+    
+    @objc func cancel () {
+        conversionLabel.isHidden = true
+        textField.text=""
+        textField.resignFirstResponder()
+    }
+    
+    @objc func apply () {
+        textField.resignFirstResponder()
     }
 }
 
@@ -67,9 +79,18 @@ extension ConverterViewController {
     }
     
     func setupVisuals() {
-        convertButton.customColors = (UIColor.salmonDimmed, UIColor.salmonBright)
-        convertButton.backgroundColor = UIColor.salmonBright
         conversionLabel.isHidden = true
+        
+        numberToolbar.barStyle = UIBarStyle.blackTranslucent
+        numberToolbar.items=[
+            UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancel)),
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Apply", style: UIBarButtonItemStyle.plain, target: self, action: #selector(apply))
+        ]
+        
+        numberToolbar.sizeToFit()
+        
+        textField.inputAccessoryView = numberToolbar
     }
 }
 
@@ -123,6 +144,8 @@ extension ConverterViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        currentRate = priceUSDArray[row]
+        if priceUSDArray.count > 0 {
+            currentRate = priceUSDArray[row]
+        }
     }
 }

@@ -41,80 +41,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v2V-6M-B8t">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CryptoCurrencies" translatesAutoresizingMaskIntoConstraints="NO" id="v2V-6M-B8t">
                                 <rect key="frame" x="90" y="5.0000000000000071" width="234" height="124.66666666666669"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="v2V-6M-B8t" secondAttribute="height" multiplier="15:8" id="y4R-2J-Oj1"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ente value:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IEW-W8-Qjx">
-                                <rect key="frame" x="90" y="137.66666666666666" width="234" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7f-wS-1xa" customClass="RoundButton" customModule="StopWatchApp" customModuleProvider="target">
-                                <rect key="frame" x="157" y="515" width="100" height="100"/>
-                                <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="512-nh-EvV"/>
-                                    <constraint firstAttribute="width" secondItem="C7f-wS-1xa" secondAttribute="height" multiplier="1:1" id="U2S-L8-oqI"/>
-                                    <constraint firstAttribute="height" constant="100" id="wMV-LV-Fs1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
-                                <state key="normal" title="Convert">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="pressConvert:" destination="Sxj-Zl-tLD" eventType="touchUpInside" id="7ww-tZ-RKN"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peN-bd-yyq">
-                                <rect key="frame" x="0.0" y="440" width="414" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="gYb-lO-rge"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d4Q-Ig-2S5">
-                                <rect key="frame" x="0.0" y="191" width="414" height="244"/>
+                            <pickerView contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="d4Q-Ig-2S5">
+                                <rect key="frame" x="0.0" y="306" width="414" height="267"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Sxj-Zl-tLD" id="a5z-pj-t4Q"/>
                                     <outlet property="delegate" destination="Sxj-Zl-tLD" id="3Da-W3-vit"/>
                                 </connections>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peN-bd-yyq">
+                                <rect key="frame" x="0.0" y="236" width="414" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="gYb-lO-rge"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter value:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t5e-kg-tHu">
+                                <rect key="frame" x="57.666666666666657" y="195" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="BCg-nI-f4M"/>
+                                    <constraint firstAttribute="height" constant="40" id="BHt-pr-1Dt"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert"/>
+                                <connections>
+                                    <action selector="didEndEditing:" destination="Sxj-Zl-tLD" eventType="editingDidEnd" id="dF2-M3-reZ"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="d4Q-Ig-2S5" firstAttribute="trailing" secondItem="X5n-4r-WVL" secondAttribute="trailing" id="1ky-m9-q87"/>
                             <constraint firstItem="v2V-6M-B8t" firstAttribute="top" secondItem="X5n-4r-WVL" secondAttribute="top" constant="5" id="4oI-Xs-SPw"/>
-                            <constraint firstItem="IEW-W8-Qjx" firstAttribute="top" secondItem="v2V-6M-B8t" secondAttribute="bottom" constant="8" id="51d-Ap-2TK"/>
                             <constraint firstItem="peN-bd-yyq" firstAttribute="leading" secondItem="X5n-4r-WVL" secondAttribute="leading" id="AtW-sN-Qug"/>
                             <constraint firstItem="d4Q-Ig-2S5" firstAttribute="leading" secondItem="X5n-4r-WVL" secondAttribute="leading" id="Dru-JV-Eeq"/>
+                            <constraint firstItem="d4Q-Ig-2S5" firstAttribute="top" secondItem="peN-bd-yyq" secondAttribute="bottom" constant="15" id="KT9-Fp-uwG"/>
                             <constraint firstItem="v2V-6M-B8t" firstAttribute="leading" secondItem="X5n-4r-WVL" secondAttribute="leading" constant="90" id="TyW-cD-jZl"/>
-                            <constraint firstItem="X5n-4r-WVL" firstAttribute="bottom" secondItem="C7f-wS-1xa" secondAttribute="bottom" constant="8" id="Ubq-UG-YqW"/>
                             <constraint firstItem="v2V-6M-B8t" firstAttribute="centerX" secondItem="X5n-4r-WVL" secondAttribute="centerX" id="VxF-j8-xnG"/>
-                            <constraint firstItem="IEW-W8-Qjx" firstAttribute="centerX" secondItem="X5n-4r-WVL" secondAttribute="centerX" id="Vzx-7L-VW6"/>
                             <constraint firstItem="X5n-4r-WVL" firstAttribute="trailing" secondItem="peN-bd-yyq" secondAttribute="trailing" id="W1p-Cb-uhP"/>
-                            <constraint firstItem="d4Q-Ig-2S5" firstAttribute="top" secondItem="IEW-W8-Qjx" secondAttribute="bottom" constant="23.329999999999998" id="duU-Ej-edF"/>
-                            <constraint firstItem="IEW-W8-Qjx" firstAttribute="leading" secondItem="v2V-6M-B8t" secondAttribute="leading" id="fI6-qX-y7K"/>
-                            <constraint firstItem="C7f-wS-1xa" firstAttribute="centerX" secondItem="X5n-4r-WVL" secondAttribute="centerX" id="htT-EJ-hyc"/>
+                            <constraint firstItem="t5e-kg-tHu" firstAttribute="centerX" secondItem="X5n-4r-WVL" secondAttribute="centerX" id="aoR-wN-zt3"/>
                             <constraint firstItem="X5n-4r-WVL" firstAttribute="trailing" secondItem="v2V-6M-B8t" secondAttribute="trailing" constant="90" id="ji2-Jm-6s2"/>
-                            <constraint firstItem="IEW-W8-Qjx" firstAttribute="trailing" secondItem="v2V-6M-B8t" secondAttribute="trailing" id="o51-6E-Cii"/>
-                            <constraint firstItem="C7f-wS-1xa" firstAttribute="top" secondItem="peN-bd-yyq" secondAttribute="bottom" constant="5" id="qTf-xP-dq6"/>
-                            <constraint firstItem="peN-bd-yyq" firstAttribute="top" secondItem="d4Q-Ig-2S5" secondAttribute="bottom" constant="5" id="wcE-Og-eHT"/>
+                            <constraint firstItem="t5e-kg-tHu" firstAttribute="top" secondItem="v2V-6M-B8t" secondAttribute="bottom" constant="65" id="ptS-PX-6Ej"/>
+                            <constraint firstItem="X5n-4r-WVL" firstAttribute="bottom" secondItem="d4Q-Ig-2S5" secondAttribute="bottom" constant="50" id="t3V-yz-qvX"/>
+                            <constraint firstItem="peN-bd-yyq" firstAttribute="top" secondItem="t5e-kg-tHu" secondAttribute="bottom" constant="1" id="yIu-WI-0K9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X5n-4r-WVL"/>
                     </view>
                     <navigationItem key="navigationItem" title="Converter" id="HHo-hR-OES"/>
                     <connections>
                         <outlet property="conversionLabel" destination="peN-bd-yyq" id="S9r-bF-GJh"/>
-                        <outlet property="convertButton" destination="C7f-wS-1xa" id="DCf-Le-Arz"/>
                         <outlet property="image" destination="v2V-6M-B8t" id="yJ3-DR-rFs"/>
                         <outlet property="picker" destination="d4Q-Ig-2S5" id="Xfx-Yl-RAB"/>
-                        <outlet property="textField" destination="IEW-W8-Qjx" id="edD-hW-TFv"/>
+                        <outlet property="textField" destination="t5e-kg-tHu" id="kO1-YG-m7G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rhe-t2-xvf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -339,6 +325,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CryptoCurrencies" width="424" height="255"/>
         <image name="clockFace" width="375" height="250"/>
         <image name="clock_image" width="25" height="25"/>
         <image name="money_image" width="25" height="25"/>
