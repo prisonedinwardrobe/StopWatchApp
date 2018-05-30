@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-
+//MARK: - VISUALS
 let px = 1 / UIScreen.main.scale
 
 extension UIFont {
@@ -25,6 +25,7 @@ extension UIColor {
     static let greenTime = UIColor(red:0.60, green:0.80, blue:0.50, alpha:1.0)
 }
 
+//MARK: - STOPWATCH TERMINATION LOGIC
 enum AppState: String, Codable {
     case paused
     case running

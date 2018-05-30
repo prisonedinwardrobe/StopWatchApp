@@ -60,6 +60,7 @@ class ViewController: UIViewController {
 // MARK: - DEFAULT OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
+       // self.navigationController?.view.backgroundColor = UIColor.salmonBright
         
         setupViewVisuals()
         setupViewConstraints()
@@ -234,7 +235,7 @@ extension ViewController: ViewControllerDelegate {
         defaults.removeObject(forKey: "DateWhenEnteredBG")
     }
     
-// MARK: - TODO TERMINAITON LOGIC
+// MARK: - TERMINAITON LOGIC
     
     func appWillDie() {
         if state != .justStarted {
@@ -267,10 +268,15 @@ extension ViewController: ViewControllerDelegate {
             
             timeLabel.text = stopWatchStringFormatter(timeLabelCentiseconds)
             lapsTableView.cellForRow(at: [0,0])?.detailTextLabel?.text = stopWatchStringFormatter(detailedTextLabelCentiseconds)
+            
+            resetButtonView.alpha = 1.0
+            resetButtonView.isEnabled = true
+            resetButtonView.setTitle("Reset", for: .normal)
         }
     }
     
 // MARK: - SAVING & RETRIEVING FROM USERDEFAULTS
+    
     func saveStateToUD(info: StopWatchData, key: String) {
         let defaults = UserDefaults.standard
         if let encodedData = try? JSONEncoder().encode(info){
