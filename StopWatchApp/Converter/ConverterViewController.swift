@@ -17,11 +17,15 @@ class ConverterViewController: UIViewController {
 // MARK: - IMAGE
     let imageURL = URL(string: "https://image.ibb.co/mbXyky/currency_01.png")
     
-// MARK: - CRYPTOCURRENCY VARIABLES
-    var currencyArray: [String] = []
-    var priceUSDArray: [Double] = []
-    var currentRate: Double = 0
+// MARK: - CRYPTOCURRENCY
+    var tickerArray = [tickerTuple]()
     
+    var lhsRate: tickerTuple = (name: "", priceUSD: 0)
+    var rhsRate: tickerTuple = (name: "", priceUSD: 0)
+    
+    func convert(lhsRate: tickerTuple, rhsRate: tickerTuple) -> Double {
+       return lhsRate.priceUSD / rhsRate.priceUSD
+    }
     
 // MARK: - @IBOUTLETS
     @IBOutlet weak var image: UIImageView!
@@ -29,33 +33,38 @@ class ConverterViewController: UIViewController {
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var conversionLabel: UILabel!
     
-    // MARK: - DEFAULT OVERRIDES
+// MARK: - DEFAULT OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchTickers()
         setupVisuals()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setupImage()
+        setupData()
     }
 }
 
 
 // MARK: - ACTIONS
 extension ConverterViewController {
-
+    @IBAction func updateButtonAction(_ sender: Any) {
+        setupData()
+    }
+    
     @IBAction func didEndEditing(_ sender: UITextField) {
-        if textField.text != "" && textField.text != nil {
-            conversionLabel.isHidden = false
-            conversionLabel.text = "\(String(Double(textField.text!)! * currentRate)) USD"
+        if textField.text != "" && textField.text != nil && textField.text?.doubleValue != 0 && tickerArray.count > 0 {
+            if let text = textField.text {
+                let input = Double(round(text.doubleValue * 1000)/1000)
+                let output = input * convert(lhsRate: lhsRate, rhsRate: rhsRate)
+                let rounded = Double(round(output * 1000)/1000).clean
+                
+                conversionLabel.text = "\(input.clean) \(lhsRate.name) is \n\(rounded) \(rhsRate.name)"
+                conversionLabel.isHidden = false
+            }
         }
     }
     
     @objc func cancel () {
         conversionLabel.isHidden = true
-        textField.text=""
+        textField.text = ""
         textField.resignFirstResponder()
     }
     
@@ -68,7 +77,6 @@ extension ConverterViewController {
 
 extension ConverterViewController {
     func setupImage() {
-        
         if let imageURL = imageURL {
             image.af_setImage(withURL: imageURL)
         }
@@ -81,45 +89,36 @@ extension ConverterViewController {
     func setupVisuals() {
         conversionLabel.isHidden = true
         
-        numberToolbar.barStyle = UIBarStyle.blackTranslucent
-        numberToolbar.items=[
+        numberToolbar.barStyle = UIBarStyle.black
+        numberToolbar.items = [
             UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancel)),
             UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil),
             UIBarButtonItem(title: "Apply", style: UIBarButtonItemStyle.plain, target: self, action: #selector(apply))
         ]
-        
         numberToolbar.sizeToFit()
+        numberToolbar.tintColor = UIColor.salmonBright
         
         textField.inputAccessoryView = numberToolbar
     }
-}
-
-// MARK: CRYPTO DOWNLOADS
-
-extension ConverterViewController {
-    func fetchTickers() {
-        CryptoCurrencyKit.fetchTickers(convert: .usd, limit: 10) { r in
-            switch r {
-            case .success(let tickers):
     
-                //self.currencyArray = tickers.map {$0.id}
-                self.setupArrays(ticker: tickers)
+    func setupData() {
+        ConverterDataProvider.shared.fetchTickers { (tickers, err) in
+            if let err = err {
+                let alert = UIAlertController(title: "Error", message: "failed to fetch tickers: \(err.localizedDescription)", preferredStyle: .alert)
+                let button = UIAlertAction(title: "Close", style: .cancel, handler: nil)
+                alert.addAction(button)
+                
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                self.tickerArray.removeAll()
+                self.tickerArray.append(contentsOf: tickers)
+                self.tickerArray.insert((name: "USD", priceUSD: 1.0), at: 1)
+                
+                self.lhsRate = tickers[0]
+                self.rhsRate = tickers[0]
+                
                 self.picker.reloadAllComponents()
-                print(tickers)
-                
-            case .failure(let error):
-                
-                print(error)
             }
-        }
-    }
-    
-    func setupArrays(ticker: [Ticker]) {
-        for i in ticker {
-            if let price = i.priceUSD {
-                priceUSDArray.append(price)
-            }
-            currencyArray.append(i.name)
         }
     }
 }
@@ -129,23 +128,26 @@ extension ConverterViewController {
 
 extension ConverterViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return currencyArray.count
+        return tickerArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let string = currencyArray[row]
-        
+        let string = tickerArray[row].name
         let attributedString = NSAttributedString(string: string, attributes: [NSAttributedStringKey.font: UIFont(name: "Helvetica", size: 17.0) as Any, NSAttributedStringKey.foregroundColor:UIColor.white])
+        
         return attributedString
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if priceUSDArray.count > 0 {
-            currentRate = priceUSDArray[row]
+        if tickerArray.count > 0 {
+            lhsRate = component == 0 ? tickerArray[row] : lhsRate
+            rhsRate = component == 1 ? tickerArray[row] : rhsRate
+            textField.sendActions(for: .editingDidEnd)
+            print("lhs: \(lhsRate), rhs: \(rhsRate)")
         }
     }
 }

@@ -60,7 +60,8 @@ class ViewController: UIViewController {
 // MARK: - DEFAULT OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
-       // self.navigationController?.view.backgroundColor = UIColor.salmonBright
+        
+        setupPressGesture()
         
         setupViewVisuals()
         setupViewConstraints()
@@ -70,7 +71,6 @@ class ViewController: UIViewController {
             appDelegate.delegate = self
         }
     }
-    
 }
 
 
@@ -114,7 +114,7 @@ extension ViewController {
             timeLabelCentiseconds = 0
             detailedTextLabelCentiseconds = 0
             timeLabel.text = "00 : 00 , 00"
-            arrayOfLaps = []
+            arrayOfLaps.removeAll()
             lapsTableView.reloadData()
             
             resetButtonView.alpha = 0.2
@@ -123,6 +123,10 @@ extension ViewController {
             releaseSavedData()
             state = .justStarted
         }
+    }
+    
+    @objc func longPressAction() {
+        
     }
 }
 
@@ -181,6 +185,12 @@ extension ViewController {
         scrollViewWidthConstraint.constant = view.frame.width
         
         scrollView.contentSize = CGSize(width: view.frame.width * 2, height: 0)
+    }
+    
+    fileprivate func setupPressGesture() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
+        longPressGesture.minimumPressDuration = 1.0
+        startButtonView.addGestureRecognizer(longPressGesture)
     }
 }
 

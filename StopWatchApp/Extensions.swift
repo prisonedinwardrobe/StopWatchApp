@@ -54,3 +54,29 @@ class StopWatchData: Codable {
         self.state = .justStarted
     }
 }
+
+//MARK: - TYPEALIAS
+typealias tickerTuple = (name: String, priceUSD: Double)
+
+//MARK: - STRING FORMATTING
+extension String {
+    static let numberFormatter = NumberFormatter()
+    var doubleValue: Double {
+        String.numberFormatter.decimalSeparator = "."
+        if let result =  String.numberFormatter.number(from: self) {
+            return result.doubleValue
+        } else {
+            String.numberFormatter.decimalSeparator = ","
+            if let result = String.numberFormatter.number(from: self) {
+                return result.doubleValue
+            }
+        }
+        return 0
+    }
+}
+
+extension Double {
+    var clean: String {
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
+}
