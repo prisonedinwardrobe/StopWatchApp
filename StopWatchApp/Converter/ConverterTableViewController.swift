@@ -67,17 +67,15 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? ConverterTableViewCell {
             cell.cellTextField.becomeFirstResponder()
-            cell.textFieldDidBeginEditing(cell.cellTextField)
         }
-        
     }
     
     func converterCellTextChanged(string: String) {
         guard let value = Double(string) else { return }
         
         self.tableView.visibleCells.forEach { (cell) in
-            if let cell = cell as? ConverterTableViewCell {
-                //тут присвоить в cell нужное значение $
+            if let cell = cell as? ConverterTableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                cell.cellTextField.text = String(value * tickerArray[indexPath.row].priceUSD)
             }
         }
     }
@@ -85,5 +83,6 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
     func textFieldBecameFirstResponder(cell: ConverterTableViewCell) {
         let indexPath = tableView.indexPath(for: cell)
         self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        print("CELL SELECTED")
     }
 }

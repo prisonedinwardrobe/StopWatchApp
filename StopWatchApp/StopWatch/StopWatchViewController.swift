@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import RealmSwift
+
+// MARK: - REALM
+let stopWatchDB = try! Realm()
 
 class ViewController: UIViewController {
     
@@ -126,7 +130,13 @@ extension ViewController {
     }
     
     @objc func longPressAction() {
+        let alert = UIAlertController(title: "Attempting Save", message: "Do you want to save current laps?", preferredStyle: .alert)
+        let buttonNo = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        let buttonYes = UIAlertAction(title: "Yes", style: .default, handler: { _ in self.saveToRealm()})
+        alert.addAction(buttonNo)
+        alert.addAction(buttonYes)
         
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -189,7 +199,7 @@ extension ViewController {
     
     fileprivate func setupPressGesture() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
-        longPressGesture.minimumPressDuration = 1.0
+        longPressGesture.minimumPressDuration = 1.5
         startButtonView.addGestureRecognizer(longPressGesture)
     }
 }
@@ -304,6 +314,19 @@ extension ViewController: ViewControllerDelegate {
     
 }
 
+//MARK: - SAVING TO REALM
+
+extension ViewController {
+    func saveToRealm() {
+        let dataToSave = DBData()
+        
+        for i in arrayOfLaps { dataToSave.laps.append(i as Int) }
+        
+       try! stopWatchDB.write { () -> Void in
+            stopWatchDB.add(dataToSave)
+        }
+    }
+}
 
 
 

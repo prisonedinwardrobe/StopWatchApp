@@ -7,5 +7,6 @@ target 'StopWatchApp' do
 
  pod 'CryptoCurrencyKit'
  pod 'AlamofireImage', '~> 3.3'
+ pod 'RealmSwift'
 
 end

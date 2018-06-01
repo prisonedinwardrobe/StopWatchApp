@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 //MARK: - VISUALS
 let px = 1 / UIScreen.main.scale
@@ -80,3 +81,17 @@ extension Double {
         return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
 }
+//MARK: - REALM CLASSES
+//class LapsArrayItem: Object {
+//    @objc dynamic var lap: Int = 0
+//}
+
+class DBData: Object {
+    @objc dynamic var date: Date = Date()
+    var laps = List<Int>()
+}
+
+
+
+
+

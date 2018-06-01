@@ -10,6 +10,7 @@
 		442C7D981D67543C52F3660F /* Pods_StopWatchApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5E2C408ED7F28151E8177D /* Pods_StopWatchApp.framework */; };
 		B32365E4209252C700F50A6D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32365E3209252C700F50A6D /* RoundButton.swift */; };
 		B323EED120B5FCEE00FE128F /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323EED020B5FCEE00FE128F /* ConverterViewController.swift */; };
+		B343D0DE20C1E4DA00FC6536 /* DBTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B343D0DD20C1E4DA00FC6536 /* DBTableViewController.swift */; };
 		B362EDCB209CC34C00D6DAC1 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362EDCA209CC34C00D6DAC1 /* CustomTableViewCell.swift */; };
 		B388D22820BEEF11001429BF /* ConverterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B388D22720BEEF11001429BF /* ConverterTableViewController.swift */; };
 		B3A0C5E5208F46BC00E400D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A0C5E4208F46BC00E400D8 /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 		6E11D9470FE4DA4FB5044C3D /* Pods-StopWatchApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StopWatchApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StopWatchApp/Pods-StopWatchApp.release.xcconfig"; sourceTree = "<group>"; };
 		B32365E3209252C700F50A6D /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		B323EED020B5FCEE00FE128F /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
+		B343D0DD20C1E4DA00FC6536 /* DBTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTableViewController.swift; sourceTree = "<group>"; };
 		B362EDCA209CC34C00D6DAC1 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		B388D22720BEEF11001429BF /* ConverterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterTableViewController.swift; sourceTree = "<group>"; };
 		B3A0C5E1208F46BC00E400D8 /* StopWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StopWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 				B3A0C5E6208F46BC00E400D8 /* StopWatchViewController.swift */,
 				B32365E3209252C700F50A6D /* RoundButton.swift */,
 				B362EDCA209CC34C00D6DAC1 /* CustomTableViewCell.swift */,
+				B343D0DD20C1E4DA00FC6536 /* DBTableViewController.swift */,
 			);
 			path = StopWatch;
 			sourceTree = "<group>";
@@ -204,12 +207,16 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoCurrencyKit/CryptoCurrencyKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoCurrencyKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -244,6 +251,7 @@
 				B3CDE46620BEF4300086A3A9 /* ConverterDataProvider.swift in Sources */,
 				B32365E4209252C700F50A6D /* RoundButton.swift in Sources */,
 				B362EDCB209CC34C00D6DAC1 /* CustomTableViewCell.swift in Sources */,
+				B343D0DE20C1E4DA00FC6536 /* DBTableViewController.swift in Sources */,
 				B3CDE46420BEF1F80086A3A9 /* ConverterTableViewCell.swift in Sources */,
 				B3A0C5E7208F46BC00E400D8 /* StopWatchViewController.swift in Sources */,
 				B3A0C5E5208F46BC00E400D8 /* AppDelegate.swift in Sources */,

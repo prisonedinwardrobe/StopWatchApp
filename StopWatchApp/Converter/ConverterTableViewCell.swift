@@ -33,8 +33,15 @@ class ConverterTableViewCell: UITableViewCell, UITextFieldDelegate {
         cellTextField.delegate = self
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    @IBAction func textFieldDidBeginEditing(_ sender: UITextField) {
         delegate?.textFieldBecameFirstResponder(cell: self)
+    }
+    
+    @IBAction func textFieldValueChanged(_ sender: UITextField) {
+        print("working")
+        if let string = cellTextField.text {
+            delegate?.converterCellTextChanged(string: string)
+        }
     }
     
     func setupCell(labelText: String, textFieldText: String, delegate: ConverterTableViewCellProtocol, selectedColor: UIColor) {
@@ -47,13 +54,13 @@ class ConverterTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.selectedBackgroundView = view
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        //нужно получить конечную строку после преобразований shouldChangeCharactersIn
-        
-        let string = ""
-        delegate?.converterCellTextChanged(string: string)
-        return true
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        //нужно получить конечную строку после преобразований shouldChangeCharactersIn
+//
+//        let string = ""
+//        delegate?.converterCellTextChanged(string: string)
+//        return true
+//    }
     
 //MARK: - TOOLBAR
     func setupToolbar() {

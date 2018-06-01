@@ -3,22 +3,32 @@ PODS:
   - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
   - CryptoCurrencyKit (0.3.1)
+  - Realm (3.5.0):
+    - Realm/Headers (= 3.5.0)
+  - Realm/Headers (3.5.0)
+  - RealmSwift (3.5.0):
+    - Realm (= 3.5.0)
 
 DEPENDENCIES:
   - AlamofireImage (~> 3.3)
   - CryptoCurrencyKit
+  - RealmSwift
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireImage
     - CryptoCurrencyKit
+    - Realm
+    - RealmSwift
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   CryptoCurrencyKit: 5c78da2dfb845e2feddb519b56169ab39f117ca1
+  Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
+  RealmSwift: 3322562622fda2ad596985ead4d8d8be30cf838c
 
-PODFILE CHECKSUM: 0bc18bb001788e3e4a39836060665400d23f549c
+PODFILE CHECKSUM: 6f2f14a95dc787632e347673137c7059d8a3999c
 
 COCOAPODS: 1.5.0
