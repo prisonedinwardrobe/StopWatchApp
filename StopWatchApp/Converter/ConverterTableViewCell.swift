@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ConverterTableViewCellProtocol: class {
-    func converterCellTextChanged(string: String)
+    func converterCellTextChanged(string: String, cell: ConverterTableViewCell)
     func textFieldBecameFirstResponder(cell: ConverterTableViewCell)
 }
 
@@ -24,7 +24,7 @@ class ConverterTableViewCell: UITableViewCell, UITextFieldDelegate {
 //MARK: - DELEGATE
     weak var delegate: ConverterTableViewCellProtocol?
     
-//MARK: - OTHER
+//MARK: - OVERRIDES
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -32,18 +32,17 @@ class ConverterTableViewCell: UITableViewCell, UITextFieldDelegate {
     override func prepareForReuse() {
         cellTextField.delegate = self
     }
-    
+//MARK: - ACTIONS
     @IBAction func textFieldDidBeginEditing(_ sender: UITextField) {
         delegate?.textFieldBecameFirstResponder(cell: self)
     }
     
-    @IBAction func textFieldValueChanged(_ sender: UITextField) {
-        print("working")
+    @IBAction func textFieldEditingChanged(_ sender: UITextField) {
         if let string = cellTextField.text {
-            delegate?.converterCellTextChanged(string: string)
+            delegate?.converterCellTextChanged(string: string, cell: self)
         }
     }
-    
+//MARK: - SETUP FUNCTIONS
     func setupCell(labelText: String, textFieldText: String, delegate: ConverterTableViewCellProtocol, selectedColor: UIColor) {
         label.text = labelText
         cellTextField.text = textFieldText
@@ -52,21 +51,15 @@ class ConverterTableViewCell: UITableViewCell, UITextFieldDelegate {
         let view = UIView(frame: self.bounds)
         view.backgroundColor = selectedColor
         self.selectedBackgroundView = view
+        
+        cellTextField.clearsOnInsertion = true
     }
-    
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        //нужно получить конечную строку после преобразований shouldChangeCharactersIn
-//
-//        let string = ""
-//        delegate?.converterCellTextChanged(string: string)
-//        return true
-//    }
-    
+        
 //MARK: - TOOLBAR
     func setupToolbar() {
         numberToolbar.barStyle = UIBarStyle.black
         numberToolbar.items = [
-            UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancel)),
+            UIBarButtonItem(title: "Hide", style: UIBarButtonItemStyle.plain, target: self, action: #selector(hide)),
             UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         ]
         numberToolbar.sizeToFit()
@@ -75,7 +68,7 @@ class ConverterTableViewCell: UITableViewCell, UITextFieldDelegate {
         cellTextField.inputAccessoryView = numberToolbar
     }
    
-    @objc func cancel() {
+    @objc func hide() {
         cellTextField.resignFirstResponder()
     }
 }

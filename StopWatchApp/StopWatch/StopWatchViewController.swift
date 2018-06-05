@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var lapsTableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var fakeTableViewHeaderHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeLabelWidthConstraint: NSLayoutConstraint!
@@ -35,18 +36,6 @@ class ViewController: UIViewController {
 // MARK: - TIMER LOGIC
     var timer = Timer()
     var timeLabelCentiseconds = 0
-    
-    func stopWatchStringFormatter(_ number: Int) -> String {
-        let centisecondsValue = number % 100
-        let secondsValue = number / 100 % 60
-        let minutesValue = number / 6000 % 60
-        let hoursValue = number / 360000 % 60
-        
-        if number >= 360000 {
-            return String(format: "%02d : %02d : %02d , %02d", hoursValue, minutesValue, secondsValue, centisecondsValue)
-        }
-        return String(format: "%02d : %02d , %02d", minutesValue, secondsValue, centisecondsValue)
-    } 
     
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
@@ -64,7 +53,6 @@ class ViewController: UIViewController {
 // MARK: - DEFAULT OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupPressGesture()
         
         setupViewVisuals()
@@ -79,7 +67,6 @@ class ViewController: UIViewController {
 
 
 // MARK: - ACTIONS
-
 extension ViewController {
     
     @IBAction func releaseStartButton(_ sender: UIButton) {
@@ -130,19 +117,22 @@ extension ViewController {
     }
     
     @objc func longPressAction() {
-        let alert = UIAlertController(title: "Attempting Save", message: "Do you want to save current laps?", preferredStyle: .alert)
-        let buttonNo = UIAlertAction(title: "No", style: .cancel, handler: nil)
-        let buttonYes = UIAlertAction(title: "Yes", style: .default, handler: { _ in self.saveToRealm()})
-        alert.addAction(buttonNo)
-        alert.addAction(buttonYes)
-        
-        self.present(alert, animated: true, completion: nil)
+        if arrayOfLaps.count > 0 {
+            let alert = UIAlertController(title: "ATTEMPTING TO SAVE", message: "Do you want to save current laps?", preferredStyle: .alert)
+            let buttonNo = UIAlertAction(title: "NO", style: .cancel, handler: nil)
+            let buttonYes = UIAlertAction(title: "YES", style: .default, handler: { _ in self.saveToRealm()})
+            alert.addAction(buttonNo)
+            alert.addAction(buttonYes)
+            
+            if self.presentedViewController == nil {
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
 }
 
 
 // MARK: - TABLEVIEW
-
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -154,7 +144,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         if arrayOfLaps.count > 1 {
             arrayOfLapsCopy = Array(arrayOfLaps[1...arrayOfLaps.count - 1])
         }
-        guard let cell = lapsTableView.dequeueReusableCell(withIdentifier: "lapsTableViewCell") as? CustomTableViewCell,
+        guard let cell = lapsTableView.dequeueReusableCell(withIdentifier: IDstopWatchCell) as? CustomTableViewCell,
               let max = arrayOfLapsCopy.max(),
               let min = arrayOfLapsCopy.min() else {
               return UITableViewCell()
@@ -168,9 +158,17 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+//MARK: - PAGE CONTROL
+extension ViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let x = scrollView.contentOffset.x / scrollView.frame.size.width
+        let index = Int(floor(x - 0.5)) + 1
+        
+        pageControl.currentPage = index
+    }
+}
 
 // MARK: - SETUP FUNCTIONS
-
 extension ViewController {
     
     fileprivate func setupViewVisuals() {
@@ -199,15 +197,14 @@ extension ViewController {
     
     fileprivate func setupPressGesture() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction))
-        longPressGesture.minimumPressDuration = 1.5
+        longPressGesture.minimumPressDuration = 0.7
         startButtonView.addGestureRecognizer(longPressGesture)
     }
 }
 
 
 // MARK: - BACKGROUND LOGIC
-
-protocol ViewControllerDelegate :class {
+protocol ViewControllerDelegate: class {
     func appDidEnterBG()
     func appWillEnterFG()
     func appWillDie()
@@ -256,7 +253,6 @@ extension ViewController: ViewControllerDelegate {
     }
     
 // MARK: - TERMINAITON LOGIC
-    
     func appWillDie() {
         if state != .justStarted {
            let deathState = StopWatchData(time: timeLabelCentiseconds, cell: detailedTextLabelCentiseconds, array: arrayOfLaps, date: Date(), state: state)
@@ -270,9 +266,9 @@ extension ViewController: ViewControllerDelegate {
     }
     
     func refreshUIAfterDeath(using data: StopWatchData) {
+        let timeToAdd = countTimeDifference(from: data.date)
         
-        if data.state == .running {
-            let timeToAdd = countTimeDifference(from: data.date)
+        if data.state == .running && timeToAdd > 0 {
             timeLabelCentiseconds = data.time + timeToAdd
             detailedTextLabelCentiseconds = data.cell + timeToAdd
             arrayOfLaps = data.array
@@ -280,7 +276,7 @@ extension ViewController: ViewControllerDelegate {
             
             startButtonView.sendActions(for: .touchUpInside)
             
-        } else if data.state == .paused {
+        } else if data.state == .paused || timeToAdd < 0 {
             timeLabelCentiseconds = data.time
             detailedTextLabelCentiseconds = data.cell
             arrayOfLaps = data.array
@@ -296,7 +292,6 @@ extension ViewController: ViewControllerDelegate {
     }
     
 // MARK: - SAVING & RETRIEVING FROM USERDEFAULTS
-    
     func saveStateToUD(info: StopWatchData, key: String) {
         let defaults = UserDefaults.standard
         if let encodedData = try? JSONEncoder().encode(info){
@@ -315,15 +310,17 @@ extension ViewController: ViewControllerDelegate {
 }
 
 //MARK: - SAVING TO REALM
-
 extension ViewController {
     func saveToRealm() {
-        let dataToSave = DBData()
-        
-        for i in arrayOfLaps { dataToSave.laps.append(i as Int) }
-        
-       try! stopWatchDB.write { () -> Void in
-            stopWatchDB.add(dataToSave)
+        if arrayOfLaps.count > 0 {
+            let dataToSave = DBData()
+            
+            for i in arrayOfLaps { dataToSave.laps.append(i as Int) }
+            dataToSave.laps[0] = detailedTextLabelCentiseconds
+            
+            try! stopWatchDB.write { () -> Void in
+                stopWatchDB.add(dataToSave)
+            }
         }
     }
 }

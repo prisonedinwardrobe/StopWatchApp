@@ -2,7 +2,7 @@
 //  Extensions.swift
 //  StopWatchApp
 //
-//  Created by Zhenya Zhornitsky on 27.04.2018.
+//  Created by leonid on 06.06.2018.
 //  Copyright © 2018 CSU. All rights reserved.
 //
 
@@ -10,9 +10,13 @@ import Foundation
 import UIKit
 import RealmSwift
 
-//MARK: - VISUALS
+//MARK: - CONSTANTS
 let px = 1 / UIScreen.main.scale
+let IDstopWatchCell = "lapsTableViewCell"
+let IDstopWatchDBCell = "DBTableViewCellIdentifier"
+let IDconverterCell = "ConverterTableViewCellIdentifier"
 
+//MARK: - VISUALS
 extension UIFont {
     static let monospaced68 = UIFont.monospacedDigitSystemFont(ofSize: 68.0, weight: .thin)
     static let monospaced17 = UIFont.monospacedDigitSystemFont(ofSize: 17.0, weight: .thin)
@@ -81,15 +85,34 @@ extension Double {
         return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
 }
-//MARK: - REALM CLASSES
-//class LapsArrayItem: Object {
-//    @objc dynamic var lap: Int = 0
-//}
 
+extension Double {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+
+func stopWatchStringFormatter(_ number: Int) -> String {
+    let centisecondsValue = number % 100
+    let secondsValue = number / 100 % 60
+    let minutesValue = number / 6000 % 60
+    let hoursValue = number / 360000 % 60
+    
+    if number >= 360000 {
+        return String(format: "%02d : %02d : %02d , %02d", hoursValue, minutesValue, secondsValue, centisecondsValue)
+    }
+    return String(format: "%02d : %02d , %02d", minutesValue, secondsValue, centisecondsValue)
+}
+
+//MARK: - REALM CLASSES
 class DBData: Object {
     @objc dynamic var date: Date = Date()
     var laps = List<Int>()
 }
+
+
 
 
 

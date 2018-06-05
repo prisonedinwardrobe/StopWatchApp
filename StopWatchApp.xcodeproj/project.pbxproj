@@ -10,6 +10,8 @@
 		442C7D981D67543C52F3660F /* Pods_StopWatchApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5E2C408ED7F28151E8177D /* Pods_StopWatchApp.framework */; };
 		B32365E4209252C700F50A6D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32365E3209252C700F50A6D /* RoundButton.swift */; };
 		B323EED120B5FCEE00FE128F /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323EED020B5FCEE00FE128F /* ConverterViewController.swift */; };
+		B32738AC20C6FEDE00ADE632 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32738AB20C6FEDE00ADE632 /* CustomTextField.swift */; };
+		B32738AE20C7168300ADE632 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32738AD20C7168300ADE632 /* Extensions.swift */; };
 		B343D0DE20C1E4DA00FC6536 /* DBTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B343D0DD20C1E4DA00FC6536 /* DBTableViewController.swift */; };
 		B362EDCB209CC34C00D6DAC1 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362EDCA209CC34C00D6DAC1 /* CustomTableViewCell.swift */; };
 		B388D22820BEEF11001429BF /* ConverterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B388D22720BEEF11001429BF /* ConverterTableViewController.swift */; };
@@ -20,7 +22,6 @@
 		B3A0C5EF208F46C000E400D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A0C5ED208F46C000E400D8 /* LaunchScreen.storyboard */; };
 		B3CDE46420BEF1F80086A3A9 /* ConverterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CDE46320BEF1F80086A3A9 /* ConverterTableViewCell.swift */; };
 		B3CDE46620BEF4300086A3A9 /* ConverterDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CDE46520BEF4300086A3A9 /* ConverterDataProvider.swift */; };
-		DBC63D162092EEE20098A33D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC63D152092EEE20098A33D /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		6E11D9470FE4DA4FB5044C3D /* Pods-StopWatchApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StopWatchApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StopWatchApp/Pods-StopWatchApp.release.xcconfig"; sourceTree = "<group>"; };
 		B32365E3209252C700F50A6D /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		B323EED020B5FCEE00FE128F /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
+		B32738AB20C6FEDE00ADE632 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		B32738AD20C7168300ADE632 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B343D0DD20C1E4DA00FC6536 /* DBTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTableViewController.swift; sourceTree = "<group>"; };
 		B362EDCA209CC34C00D6DAC1 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		B388D22720BEEF11001429BF /* ConverterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterTableViewController.swift; sourceTree = "<group>"; };
@@ -41,7 +44,6 @@
 		B3A0C5F0208F46C000E400D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3CDE46320BEF1F80086A3A9 /* ConverterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterTableViewCell.swift; sourceTree = "<group>"; };
 		B3CDE46520BEF4300086A3A9 /* ConverterDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterDataProvider.swift; sourceTree = "<group>"; };
-		DBC63D152092EEE20098A33D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				B388D22720BEEF11001429BF /* ConverterTableViewController.swift */,
 				B3CDE46320BEF1F80086A3A9 /* ConverterTableViewCell.swift */,
 				B3CDE46520BEF4300086A3A9 /* ConverterDataProvider.swift */,
+				B32738AB20C6FEDE00ADE632 /* CustomTextField.swift */,
 			);
 			path = Converter;
 			sourceTree = "<group>";
@@ -80,9 +83,9 @@
 			isa = PBXGroup;
 			children = (
 				B3A0C5E6208F46BC00E400D8 /* StopWatchViewController.swift */,
+				B343D0DD20C1E4DA00FC6536 /* DBTableViewController.swift */,
 				B32365E3209252C700F50A6D /* RoundButton.swift */,
 				B362EDCA209CC34C00D6DAC1 /* CustomTableViewCell.swift */,
-				B343D0DD20C1E4DA00FC6536 /* DBTableViewController.swift */,
 			);
 			path = StopWatch;
 			sourceTree = "<group>";
@@ -111,8 +114,8 @@
 				B323EECF20B5FC9600FE128F /* Converter */,
 				B355FD2F20987ACB00A88CDA /* StopWatch */,
 				B3A0C5F0208F46C000E400D8 /* Info.plist */,
+				B32738AD20C7168300ADE632 /* Extensions.swift */,
 				B3A0C5E4208F46BC00E400D8 /* AppDelegate.swift */,
-				DBC63D152092EEE20098A33D /* Extensions.swift */,
 				B3A0C5EB208F46C000E400D8 /* Assets.xcassets */,
 				B3A0C5ED208F46C000E400D8 /* LaunchScreen.storyboard */,
 				B3A0C5E8208F46BC00E400D8 /* Main.storyboard */,
@@ -249,13 +252,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3CDE46620BEF4300086A3A9 /* ConverterDataProvider.swift in Sources */,
+				B32738AC20C6FEDE00ADE632 /* CustomTextField.swift in Sources */,
 				B32365E4209252C700F50A6D /* RoundButton.swift in Sources */,
 				B362EDCB209CC34C00D6DAC1 /* CustomTableViewCell.swift in Sources */,
+				B32738AE20C7168300ADE632 /* Extensions.swift in Sources */,
 				B343D0DE20C1E4DA00FC6536 /* DBTableViewController.swift in Sources */,
 				B3CDE46420BEF1F80086A3A9 /* ConverterTableViewCell.swift in Sources */,
 				B3A0C5E7208F46BC00E400D8 /* StopWatchViewController.swift in Sources */,
 				B3A0C5E5208F46BC00E400D8 /* AppDelegate.swift in Sources */,
-				DBC63D162092EEE20098A33D /* Extensions.swift in Sources */,
 				B388D22820BEEF11001429BF /* ConverterTableViewController.swift in Sources */,
 				B323EED120B5FCEE00FE128F /* ConverterViewController.swift in Sources */,
 			);

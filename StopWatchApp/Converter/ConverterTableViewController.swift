@@ -30,7 +30,7 @@ class ConverterTableViewController: UIViewController {
     func setupData() {
         ConverterDataProvider.shared.fetchTickers { (tickers, err) in
             if let err = err {
-                let alert = UIAlertController(title: "Error", message: "failed to fetch tickers: \(err.localizedDescription)", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error", message: "Failed to fetch tickers: \(err.localizedDescription)", preferredStyle: .alert)
                 let button = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                 alert.addAction(button)
                 
@@ -38,17 +38,27 @@ class ConverterTableViewController: UIViewController {
             } else {
                 self.tickerArray.removeAll()
                 self.tickerArray.append(contentsOf: tickers)
+                self.tickerArray.insert((name: "USD", priceUSD: 1.0), at: 1)
+                
                 self.tableView.reloadData()
             }
         }
     }
     func setupVisuals() {
         self.navigationController?.navigationBar.tintColor = UIColor.salmonBright
+        tableView.rowHeight = 44
+    }
+}
+
+//MARK: - ACTIONS
+extension ConverterTableViewController {
+    @IBAction func updateButtonAction() {
+        setupData()
+        tableView.reloadData()
     }
 }
 
 //MARK: - TABLEVIEW
-
 extension ConverterTableViewController: UITableViewDataSource, UITableViewDelegate, ConverterTableViewCellProtocol {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,9 +66,11 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ConverterTableViewCellIdentifier") as? ConverterTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: IDconverterCell) as? ConverterTableViewCell else { return UITableViewCell() }
         
-        cell.setupCell(labelText: tickerArray[indexPath.row].name, textFieldText: String(tickerArray[indexPath.row].priceUSD), delegate: self, selectedColor: UIColor.salmonBright)
+        let string = String((1 / tickerArray[indexPath.row].priceUSD).clean)
+        
+        cell.setupCell(labelText: tickerArray[indexPath.row].name, textFieldText: string, delegate: self, selectedColor: UIColor.salmonBright)
         cell.setupToolbar()
         
         return cell
@@ -70,19 +82,28 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func converterCellTextChanged(string: String) {
-        guard let value = Double(string) else { return }
-        
-        self.tableView.visibleCells.forEach { (cell) in
-            if let cell = cell as? ConverterTableViewCell, let indexPath = tableView.indexPath(for: cell) {
-                cell.cellTextField.text = String(value * tickerArray[indexPath.row].priceUSD)
-            }
+    func textFieldBecameFirstResponder(cell: ConverterTableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell) {
+            self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            print("CELL SELECTED, \(indexPath.row)")
         }
     }
     
-    func textFieldBecameFirstResponder(cell: ConverterTableViewCell) {
-        let indexPath = tableView.indexPath(for: cell)
-        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-        print("CELL SELECTED")
+    func converterCellTextChanged(string: String, cell: ConverterTableViewCell) {
+        
+        guard let sentCellIndexPath = tableView.indexPath(for: cell) else { return }
+        
+        let coefficient = tickerArray[sentCellIndexPath.row].priceUSD
+        
+        self.tableView.visibleCells.forEach { (cell) in
+            
+            if let cell = cell as? ConverterTableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                if tableView.indexPath(for: cell) == sentCellIndexPath {
+                    cell.cellTextField.text = string
+                } else {
+                    cell.cellTextField.text = ((string.doubleValue * coefficient) / tickerArray[indexPath.row].priceUSD).clean
+                }
+            }
+        }
     }
 }

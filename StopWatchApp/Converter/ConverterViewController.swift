@@ -52,11 +52,11 @@ extension ConverterViewController {
     @IBAction func didEndEditing(_ sender: UITextField) {
         if textField.text != "" && textField.text != nil && textField.text?.doubleValue != 0 && tickerArray.count > 0 {
             if let text = textField.text {
-                let input = Double(round(text.doubleValue * 1000)/1000)
+                let input = text.doubleValue
                 let output = input * convert(lhsRate: lhsRate, rhsRate: rhsRate)
-                let rounded = Double(round(output * 1000)/1000).clean
+                let rounded = Double(round(output * 100000)/100000)
                 
-                conversionLabel.text = "\(input.clean) \(lhsRate.name) is \n\(rounded) \(rhsRate.name)"
+                conversionLabel.text = "\(input.clean) \(lhsRate.name) is \n\(rounded.clean) \(rhsRate.name)"
                 conversionLabel.isHidden = false
             }
         }
@@ -74,8 +74,8 @@ extension ConverterViewController {
 }
 
 // MARK: - SETUP FUNCTIONS
-
 extension ConverterViewController {
+    
     func setupImage() {
         if let imageURL = imageURL {
             image.af_setImage(withURL: imageURL)
@@ -104,7 +104,7 @@ extension ConverterViewController {
     func setupData() {
         ConverterDataProvider.shared.fetchTickers { (tickers, err) in
             if let err = err {
-                let alert = UIAlertController(title: "Error", message: "failed to fetch tickers: \(err.localizedDescription)", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error", message: "Failed to fetch tickers: \(err.localizedDescription)", preferredStyle: .alert)
                 let button = UIAlertAction(title: "Close", style: .cancel, handler: nil)
                 alert.addAction(button)
                 

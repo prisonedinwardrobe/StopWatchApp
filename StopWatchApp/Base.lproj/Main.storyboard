@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aF9-8A-10z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aF9-8A-10z">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -128,17 +128,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P1r-kP-8as">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P1r-kP-8as">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                                 <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConverterTableViewCellIdentifier" id="MtJ-Ws-ZgB" customClass="ConverterTableViewCell" customModule="StopWatchApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConverterTableViewCellIdentifier" rowHeight="45" id="MtJ-Ws-ZgB" customClass="ConverterTableViewCell" customModule="StopWatchApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MtJ-Ws-ZgB" id="pfj-Ll-DOp">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSA-zS-9bJ">
@@ -147,21 +147,21 @@
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2AH-gf-cMH">
-                                                    <rect key="frame" x="57.666666666666657" y="-0.33333333333333215" width="328.33333333333337" height="44.333333333333329"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2AH-gf-cMH">
+                                                    <rect key="frame" x="57.666666666666657" y="-0.33333333333333215" width="336.33333333333337" height="44.333333333333329"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                     <connections>
                                                         <action selector="textFieldDidBeginEditing:" destination="MtJ-Ws-ZgB" eventType="editingDidBegin" id="gdr-5P-KAt"/>
-                                                        <action selector="textFieldValueChanged:" destination="MtJ-Ws-ZgB" eventType="valueChanged" id="mId-Iz-YfP"/>
+                                                        <action selector="textFieldEditingChanged:" destination="MtJ-Ws-ZgB" eventType="editingChanged" id="k4J-oy-v9c"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2AH-gf-cMH" firstAttribute="leading" secondItem="GSA-zS-9bJ" secondAttribute="trailing" constant="8" id="GbG-TI-sc4"/>
                                                 <constraint firstItem="GSA-zS-9bJ" firstAttribute="leading" secondItem="pfj-Ll-DOp" secondAttribute="leading" constant="8" id="OC4-Hn-esg"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="2AH-gf-cMH" secondAttribute="trailing" constant="8" id="TLh-mw-zlN"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="2AH-gf-cMH" secondAttribute="trailing" id="TLh-mw-zlN"/>
                                                 <constraint firstItem="GSA-zS-9bJ" firstAttribute="centerY" secondItem="pfj-Ll-DOp" secondAttribute="centerY" id="haZ-aa-V2D"/>
                                                 <constraint firstItem="2AH-gf-cMH" firstAttribute="centerY" secondItem="pfj-Ll-DOp" secondAttribute="centerY" id="wqj-zb-bwk"/>
                                             </constraints>
@@ -192,7 +192,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yZk-OP-TuH"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Aet-XD-YX9"/>
+                    <navigationItem key="navigationItem" id="Aet-XD-YX9">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="refresh" id="wsG-rK-gzR">
+                            <connections>
+                                <action selector="updateButtonAction" destination="qDf-70-3eK" id="ZBy-H8-GX6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="P1r-kP-8as" id="oW6-ZJ-bCp"/>
                     </connections>
@@ -243,6 +249,9 @@
                                             <constraint firstItem="5sE-wO-vuN" firstAttribute="top" secondItem="m8f-QM-4pQ" secondAttribute="top" id="kso-wn-tuP"/>
                                             <constraint firstAttribute="height" constant="250" id="r8e-t4-mDJ"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="qY6-ln-F0W"/>
+                                        </connections>
                                     </scrollView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yfi-60-Urn" userLabel="Start Button" customClass="RoundButton" customModule="StopWatchApp" customModuleProvider="target">
                                         <rect key="frame" x="16" y="200" width="100" height="100"/>
@@ -324,6 +333,9 @@
                                             <constraint firstAttribute="height" id="5rZ-eM-EIg"/>
                                         </constraints>
                                     </view>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="hc4-zb-KW3">
+                                        <rect key="frame" x="364" y="231.66666666666669" width="23" height="37"/>
+                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -338,9 +350,11 @@
                                     <constraint firstAttribute="bottom" secondItem="BLT-8q-IXL" secondAttribute="bottom" id="IRK-kC-wgZ"/>
                                     <constraint firstItem="BLT-8q-IXL" firstAttribute="trailing" secondItem="6so-wk-uvL" secondAttribute="trailing" constant="16" id="P23-aN-amS"/>
                                     <constraint firstItem="BLT-8q-IXL" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" id="YCq-bz-ASB"/>
+                                    <constraint firstItem="hc4-zb-KW3" firstAttribute="centerY" secondItem="Yfi-60-Urn" secondAttribute="centerY" id="fTL-jh-s3c"/>
                                     <constraint firstItem="TxQ-tv-LZc" firstAttribute="centerY" secondItem="Yfi-60-Urn" secondAttribute="centerY" id="jHk-8u-JxA"/>
                                     <constraint firstItem="BLT-8q-IXL" firstAttribute="top" secondItem="Yfi-60-Urn" secondAttribute="bottom" constant="16" id="kCp-ih-4JD"/>
                                     <constraint firstItem="6so-wk-uvL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Yfi-60-Urn" secondAttribute="bottom" id="kMC-mL-fgd"/>
+                                    <constraint firstItem="hc4-zb-KW3" firstAttribute="centerX" secondItem="kAV-Yy-B4A" secondAttribute="centerX" id="lbX-qx-CFx"/>
                                     <constraint firstAttribute="trailing" secondItem="m8f-QM-4pQ" secondAttribute="trailing" id="qaY-Tv-3cc"/>
                                     <constraint firstItem="Yfi-60-Urn" firstAttribute="leading" secondItem="kAV-Yy-B4A" secondAttribute="leading" constant="16" id="xkP-9u-xOu"/>
                                     <constraint firstAttribute="trailing" secondItem="TxQ-tv-LZc" secondAttribute="trailing" constant="16" id="yxM-1a-mfH"/>
@@ -369,6 +383,7 @@
                         <outlet property="fakeTableViewHeaderHeightConstraint" destination="5rZ-eM-EIg" id="jeT-3b-MmE"/>
                         <outlet property="imageViewWidthConstraint" destination="MeB-S8-TaD" id="gnz-ZM-ZZV"/>
                         <outlet property="lapsTableView" destination="BLT-8q-IXL" id="eQ3-sM-a0U"/>
+                        <outlet property="pageControl" destination="hc4-zb-KW3" id="snz-WO-3J1"/>
                         <outlet property="resetButtonView" destination="TxQ-tv-LZc" id="oy0-bz-MM2"/>
                         <outlet property="scrollView" destination="m8f-QM-4pQ" id="gUR-bA-3Mi"/>
                         <outlet property="scrollViewWidthConstraint" destination="ArX-a3-7Vx" id="r3T-Oe-BMV"/>
@@ -381,21 +396,21 @@
             </objects>
             <point key="canvasLocation" x="-245" y="11"/>
         </scene>
-        <!--Table View Controller-->
+        <!--StopWatchDBTable-->
         <scene sceneID="kuw-uc-Cot">
             <objects>
-                <viewController id="x2R-fa-FKV" customClass="DBTableViewController" customModule="StopWatchApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="StopWatchDBTable" id="x2R-fa-FKV" customClass="DBTableViewController" customModule="StopWatchApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fUd-AN-Jlh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qGf-56-l00">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qGf-56-l00">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                                 <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DBTableViewCellIdentifier" textLabel="7Lv-u9-ev6" detailTextLabel="Klk-TA-IlC" style="IBUITableViewCellStyleValue1" id="a4O-fH-seV">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DBTableViewCellIdentifier" textLabel="7Lv-u9-ev6" detailTextLabel="Klk-TA-IlC" style="IBUITableViewCellStyleValue1" id="a4O-fH-seV" customClass="CustomTableViewCell" customModule="StopWatchApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a4O-fH-seV" id="boh-y3-Umv">
@@ -436,8 +451,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Doi-im-cyd"/>
                     </view>
+                    <navigationItem key="navigationItem" id="8Wi-Tp-hlk">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="trash" id="Y0z-hJ-gmC">
+                            <connections>
+                                <action selector="trashButtonAction" destination="x2R-fa-FKV" id="52q-qW-caI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="qGf-56-l00" id="S6H-BY-RLg"/>
+                        <outlet property="trashButton" destination="Y0z-hJ-gmC" id="7Gz-bY-8fu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAA-oX-0WM" userLabel="First Responder" sceneMemberID="firstResponder"/>
