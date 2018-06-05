@@ -53,15 +53,18 @@ class ViewController: UIViewController {
 // MARK: - DEFAULT OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupNotificationCenterObservers()
         setupPressGesture()
         
         setupViewVisuals()
         setupViewConstraints()
         appSetupAfterDeath()
         
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            appDelegate.delegate = self
-        }
+//MARK: - APPDELEGATE DELEGATE (uncomment to make BG/Termination logic work through app delegate)
+//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//            appDelegate.delegate = self
+//        }
     }
 }
 
@@ -71,6 +74,7 @@ extension ViewController {
     
     @IBAction func releaseStartButton(_ sender: UIButton) {
         if timer.isValid {
+            arrayOfLaps[0] = detailedTextLabelCentiseconds
             timer.invalidate()
             startButtonView.setTitle("Start", for: .normal)
             resetButtonView.setTitle("Reset", for: .normal)
@@ -200,6 +204,12 @@ extension ViewController {
         longPressGesture.minimumPressDuration = 0.7
         startButtonView.addGestureRecognizer(longPressGesture)
     }
+    
+    func setupNotificationCenterObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBG), name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterFG), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appWillDie), name: .UIApplicationWillTerminate, object: nil)
+    }
 }
 
 
@@ -211,16 +221,16 @@ protocol ViewControllerDelegate: class {
 }
 
 extension ViewController: ViewControllerDelegate {
-    func appDidEnterBG() {
+    @objc func appDidEnterBG() {
         if timer.isValid {
-            UserDefaults.standard.set(Date(), forKey: "DateWhenEnteredBG")
+            UserDefaults.standard.set(Date(), forKey: IDdateWhenEnteredBG)
             print("adebg works")
         }
     }
     
-    func appWillEnterFG() {
+    @objc func appWillEnterFG() {
         if timer.isValid {
-            if let startDate = UserDefaults.standard.object(forKey: "DateWhenEnteredBG") as? Date {
+            if let startDate = UserDefaults.standard.object(forKey: IDdateWhenEnteredBG) as? Date {
                 refreshUI(adding: countTimeDifference(from: startDate))
                 print("aweFG works")
             }
@@ -248,20 +258,20 @@ extension ViewController: ViewControllerDelegate {
     
     func releaseSavedData() {
         let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: "DeathState")
-        defaults.removeObject(forKey: "DateWhenEnteredBG")
+        defaults.removeObject(forKey: IDdeathState)
+        defaults.removeObject(forKey: IDdateWhenEnteredBG)
     }
     
 // MARK: - TERMINAITON LOGIC
-    func appWillDie() {
+    @objc func appWillDie() {
         if state != .justStarted {
            let deathState = StopWatchData(time: timeLabelCentiseconds, cell: detailedTextLabelCentiseconds, array: arrayOfLaps, date: Date(), state: state)
-            saveStateToUD(info: deathState, key: "DeathState")
+            saveStateToUD(info: deathState, key: IDdeathState)
         }
     }
     
     func appSetupAfterDeath() {
-        let data = retrieveStateFromUD(key: "DeathState")
+        let data = retrieveStateFromUD(key: IDdeathState)
         refreshUIAfterDeath(using: data)
     }
     

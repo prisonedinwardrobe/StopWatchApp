@@ -15,6 +15,8 @@ let px = 1 / UIScreen.main.scale
 let IDstopWatchCell = "lapsTableViewCell"
 let IDstopWatchDBCell = "DBTableViewCellIdentifier"
 let IDconverterCell = "ConverterTableViewCellIdentifier"
+let IDdateWhenEnteredBG = "DateWhenEnteredBG"
+let IDdeathState = "DeathState"
 
 //MARK: - VISUALS
 extension UIFont {

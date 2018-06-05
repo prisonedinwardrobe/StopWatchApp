@@ -55,7 +55,6 @@ class ConverterTableViewCell: UITableViewCell, UITextFieldDelegate {
         cellTextField.clearsOnInsertion = true
     }
         
-//MARK: - TOOLBAR
     func setupToolbar() {
         numberToolbar.barStyle = UIBarStyle.black
         numberToolbar.items = [
