@@ -13,6 +13,7 @@ class ConverterTableViewController: UIViewController {
     var tickerArray = [tickerTuple]()
     var conversionResult = [tickerTuple]()
     var currentCoefficient = 1.0
+    var convertationHasHappened = false
     
 //MARK: - @IBOUTLETS
     @IBOutlet weak var tableView: UITableView!
@@ -43,8 +44,8 @@ class ConverterTableViewController: UIViewController {
                 self.tickerArray.append(contentsOf: tickers)
                 self.tickerArray.insert((name: "USD", priceUSD: 1.0), at: 1)
                 
-                self.conversionResult = self.tickerArray
-                
+               // self.conversionResult = self.tickerArray
+                self.convertationHasHappened = false
                 self.tableView.reloadData()
             }
         }
@@ -74,13 +75,10 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
         guard let cell = tableView.dequeueReusableCell(withIdentifier: IDconverterCell) as? ConverterTableViewCell else { return UITableViewCell() }
         
         var string: String = ""
-        let tickerComparisonArray = tickerArray.compactMap {$0.priceUSD}
-        let resultComparisonArray = conversionResult.compactMap {$0.priceUSD}
         
-        if tickerComparisonArray == resultComparisonArray {
+        if !convertationHasHappened {
             string = String(((1 / tickerArray[indexPath.row].priceUSD * 100).rounded(toPlaces: 4)).clean)
         } else {
-//            string = String(conversionResult[indexPath.row].priceUSD)
             string = String((currentCoefficient / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4).clean)
         }
         cell.setupCell(labelText: tickerArray[indexPath.row].name, textFieldText: string, delegate: self, selectedColor: UIColor.salmonBright)
@@ -104,6 +102,7 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
     
     func converterCellTextChanged(string: String, cell: ConverterTableViewCell) {
         
+        convertationHasHappened = true
         guard let sentCellIndexPath = tableView.indexPath(for: cell) else { return }
         
         let coefficient = tickerArray[sentCellIndexPath.row].priceUSD
@@ -113,10 +112,8 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
             if let cell = self.tableView.cellForRow(at: [0, i]) as? ConverterTableViewCell, let indexPath = tableView.indexPath(for: cell) {
                 if tableView.indexPath(for: cell) == sentCellIndexPath {
                     cell.cellTextField.text = string
-                    conversionResult[indexPath.row].priceUSD = ((string.doubleValue * coefficient) / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4)
                 } else {
                     cell.cellTextField.text = (((string.doubleValue * coefficient) / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4)).clean
-                    conversionResult[indexPath.row].priceUSD = ((string.doubleValue * coefficient) / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4)
                 }
             }
         }
