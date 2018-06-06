@@ -81,7 +81,7 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
             string = String(((1 / tickerArray[indexPath.row].priceUSD * 100).rounded(toPlaces: 4)).clean)
         } else {
 //            string = String(conversionResult[indexPath.row].priceUSD)
-            string = String((currentCoefficient / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4))
+            string = String((currentCoefficient / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4).clean)
         }
         cell.setupCell(labelText: tickerArray[indexPath.row].name, textFieldText: string, delegate: self, selectedColor: UIColor.salmonBright)
         cell.setupToolbar()
