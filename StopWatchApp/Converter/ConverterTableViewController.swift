@@ -12,6 +12,7 @@ class ConverterTableViewController: UIViewController {
 
     var tickerArray = [tickerTuple]()
     var conversionResult = [tickerTuple]()
+    var currentCoefficient = 1.0
     
 //MARK: - @IBOUTLETS
     @IBOutlet weak var tableView: UITableView!
@@ -79,7 +80,8 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
         if tickerComparisonArray == resultComparisonArray {
             string = String(((1 / tickerArray[indexPath.row].priceUSD * 100).rounded(toPlaces: 4)).clean)
         } else {
-            string = String(conversionResult[indexPath.row].priceUSD)
+//            string = String(conversionResult[indexPath.row].priceUSD)
+            string = String((currentCoefficient / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4))
         }
         cell.setupCell(labelText: tickerArray[indexPath.row].name, textFieldText: string, delegate: self, selectedColor: UIColor.salmonBright)
         cell.setupToolbar()
@@ -105,6 +107,7 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
         guard let sentCellIndexPath = tableView.indexPath(for: cell) else { return }
         
         let coefficient = tickerArray[sentCellIndexPath.row].priceUSD
+        currentCoefficient = string.doubleValue * coefficient
         
         for i in 0...tickerArray.count {
             if let cell = self.tableView.cellForRow(at: [0, i]) as? ConverterTableViewCell, let indexPath = tableView.indexPath(for: cell) {
@@ -116,19 +119,8 @@ extension ConverterTableViewController: UITableViewDataSource, UITableViewDelega
                     conversionResult[indexPath.row].priceUSD = ((string.doubleValue * coefficient) / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4)
                 }
             }
-//        self.tableView.visibleCells.forEach { (cell) in
-//            if let cell = cell as? ConverterTableViewCell, let indexPath = tableView.indexPath(for: cell) {
-//                if tableView.indexPath(for: cell) == sentCellIndexPath {
-//                    cell.cellTextField.text = string
-//                    conversionResult[indexPath.row].priceUSD = ((string.doubleValue * coefficient) / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4)
-//                } else {
-//                    cell.cellTextField.text = (((string.doubleValue * coefficient) / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4)).clean
-//                    conversionResult[indexPath.row].priceUSD = ((string.doubleValue * coefficient) / tickerArray[indexPath.row].priceUSD).rounded(toPlaces: 4)
-//                }
-//            }
-//        }
+        }
     }
-}
 }
 //MARK: - HANDLING KEYBOARD ANIMATION
 

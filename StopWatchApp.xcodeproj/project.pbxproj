@@ -11,6 +11,7 @@
 		B32365E4209252C700F50A6D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32365E3209252C700F50A6D /* RoundButton.swift */; };
 		B323EED120B5FCEE00FE128F /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323EED020B5FCEE00FE128F /* ConverterViewController.swift */; };
 		B32738AE20C7168300ADE632 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32738AD20C7168300ADE632 /* Extensions.swift */; };
+		B32738B120C7D69800ADE632 /* commented.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32738B020C7D69800ADE632 /* commented.swift */; };
 		B343D0DE20C1E4DA00FC6536 /* DBTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B343D0DD20C1E4DA00FC6536 /* DBTableViewController.swift */; };
 		B362EDCB209CC34C00D6DAC1 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362EDCA209CC34C00D6DAC1 /* CustomTableViewCell.swift */; };
 		B388D22820BEEF11001429BF /* ConverterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B388D22720BEEF11001429BF /* ConverterTableViewController.swift */; };
@@ -30,6 +31,7 @@
 		B32365E3209252C700F50A6D /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		B323EED020B5FCEE00FE128F /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
 		B32738AD20C7168300ADE632 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B32738B020C7D69800ADE632 /* commented.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commented.swift; sourceTree = "<group>"; };
 		B343D0DD20C1E4DA00FC6536 /* DBTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTableViewController.swift; sourceTree = "<group>"; };
 		B362EDCA209CC34C00D6DAC1 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		B388D22720BEEF11001429BF /* ConverterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterTableViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,14 @@
 			path = Converter;
 			sourceTree = "<group>";
 		};
+		B32738AF20C7D68400ADE632 /* misc */ = {
+			isa = PBXGroup;
+			children = (
+				B32738B020C7D69800ADE632 /* commented.swift */,
+			);
+			path = misc;
+			sourceTree = "<group>";
+		};
 		B355FD2F20987ACB00A88CDA /* StopWatch */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +118,7 @@
 		B3A0C5E3208F46BC00E400D8 /* StopWatchApp */ = {
 			isa = PBXGroup;
 			children = (
+				B32738AF20C7D68400ADE632 /* misc */,
 				B323EECF20B5FC9600FE128F /* Converter */,
 				B355FD2F20987ACB00A88CDA /* StopWatch */,
 				B3A0C5F0208F46C000E400D8 /* Info.plist */,
@@ -249,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3CDE46620BEF4300086A3A9 /* ConverterDataProvider.swift in Sources */,
+				B32738B120C7D69800ADE632 /* commented.swift in Sources */,
 				B32365E4209252C700F50A6D /* RoundButton.swift in Sources */,
 				B362EDCB209CC34C00D6DAC1 /* CustomTableViewCell.swift in Sources */,
 				B32738AE20C7168300ADE632 /* Extensions.swift in Sources */,
