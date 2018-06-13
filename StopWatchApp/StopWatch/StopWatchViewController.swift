@@ -19,7 +19,6 @@ class ViewController: UIViewController {
 // MARK: - LAPSTABLEVIEW LOGIC
     var arrayOfLaps: [Int] = []
     var detailedTextLabelCentiseconds = 0
-    var testSourcetree = "12312313"
     
 // MARK: - @IBOUTLETS
     @IBOutlet weak var startButtonView: RoundButton!
